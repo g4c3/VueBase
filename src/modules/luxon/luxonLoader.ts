@@ -1,5 +1,3 @@
-// import * as luxon from 'luxon'
-// import * as d from 'luxon'
 import { App } from 'vue';
 import {
     DateTime,
@@ -45,13 +43,13 @@ export default{
         function load(): TLuxon{
             return luxon
         }
-        app.config.globalProperties.$lx = load();
+        app.config.globalProperties.$luxeon = load();
     }    
 };
 
 declare module "@vue/runtime-core" {
     //Bind to `this` keyword
     interface ComponentCustomProperties {
-      $lx: TLuxon;
+      $luxeon: TLuxon;
     }
 }
