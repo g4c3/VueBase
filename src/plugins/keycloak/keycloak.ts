@@ -1,5 +1,4 @@
 import Keycloak, {KeycloakInstance} from "keycloak-js"
-import { reactive } from 'vue'
 import { App } from 'vue';
 
 const keycloakOptions = {
@@ -9,6 +8,7 @@ const keycloakOptions = {
     'public-client': true,
     'verify-token-audience': false
 }
+
 const keycloak = Keycloak(keycloakOptions)
 keycloak.init({onLoad: 'login-required'}).then((auth) => {
     if (!auth) {
@@ -37,10 +37,8 @@ keycloak.init({onLoad: 'login-required'}).then((auth) => {
 export default{
     install:(app: App) => {
         function load(): KeycloakInstance{
-            // let r = reactive({keycloak});
             return keycloak
-        }
-    
+        }    
         app.config.globalProperties.$keycloak = load();
     }
 };

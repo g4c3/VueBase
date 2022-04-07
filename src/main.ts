@@ -11,19 +11,13 @@ import VueAxios from 'vue-axios'
 import VueSvgInlinePlugin from "vue-svg-inline-plugin";
 import keycloak from './plugins/keycloak/keycloak'
 
-createApp(App
-//     { 
-//     render(){
-//         return h(App, reactive({keycloak}))
-//     } 
-// }
-)
-.use(store)
-.use(router)    
-.use(_.install)
-.use(luxon)
-.use(i18n)
-.use(VueAxios, axios)
-.use(VueSvgInlinePlugin)
-.use(keycloak)
-.mount('#app')
+createApp(App)
+    .use(store)
+    .use(router)    
+    .use(_.install)
+    .use(luxon)
+    .use(i18n)
+    .use(VueAxios, axios)
+    .use(VueSvgInlinePlugin)
+    .use(keycloak.install)
+    .mount('#app')
