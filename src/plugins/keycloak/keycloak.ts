@@ -1,4 +1,4 @@
-import Keycloak, {KeycloakInstance} from "keycloak-js"
+import Keycloak, { KeycloakInstance } from "keycloak-js"
 import { App } from 'vue';
 
 const keycloakOptions = {
@@ -14,24 +14,24 @@ keycloak.init({onLoad: 'login-required'}).then((auth) => {
     if (!auth) {
       window.location.reload();
     } else {
-      console.log("Authenticated");
+    //   console.log("Authenticated");
     }  
   
     //Token Refresh
     setInterval(() => {
       keycloak.updateToken(70).then((refreshed) => {
         if (refreshed) {
-            console.log('Token refreshed' + refreshed);
+            // console.log('Token refreshed' + refreshed);
         } else {
-            console.log('Token not refreshed, valid for ' + keycloak.tokenParsed?.exp  + ' seconds');
+            // console.log('Token not refreshed, valid for ' + keycloak.tokenParsed?.exp  + ' seconds');
         }
       }).catch(() => {
-        console.log('Failed to refresh token');
+        // console.log('Failed to refresh token');
       });
     }, 6000)
   
   }).catch(() => {
-    console.log("Authenticated Failed");
+    // console.log("Authenticated Failed");
 })
 
 export default{
