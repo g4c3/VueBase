@@ -3,6 +3,9 @@
     <img alt="Vue logo" src="../assets/logo.png">
     <img v-svg-inline class="icon" src="../assets/logo.svg" alt="example svg image" />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
+    <button type="button" @click="logOut">
+    Block Button
+    </button>
   </div>
 </template>
 
@@ -15,5 +18,12 @@ export default defineComponent({
   components: {
     HelloWorld,
   },
+  methods:{
+    logOut(){
+      console.log(this.$keycloak)
+      this.$keycloak.logout()
+    }
+  }
+
 });
 </script>

@@ -4,7 +4,6 @@ import { App } from 'vue';
 export default {
   // called by Vue.use(FirstPlugin)
   install:(app: App) => {
-
     function load(): LoDashStatic{
       return _;
     }
