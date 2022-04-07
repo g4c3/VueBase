@@ -4,7 +4,7 @@
     <img v-svg-inline class="icon" src="../assets/logo.svg" alt="example svg image" />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     {{time}}
-    <button type="button" @click="logOut"> Logout Button </button>
+    <button type="button" @click="logOut"> {{$t("logoutBtn")}} </button>
   </div>
 </template>
 

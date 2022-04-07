@@ -2,7 +2,6 @@
 // import * as d from 'luxon'
 import { App } from 'vue';
 import {
-    // VERSION,
     DateTime,
     Duration,
     Interval,
@@ -29,7 +28,6 @@ type TLuxon = {
 } 
 
 const luxon: TLuxon = {
-    // VERSION,
     DateTime,
     Duration,
     Interval,
@@ -39,7 +37,7 @@ const luxon: TLuxon = {
     IANAZone,
     InvalidZone,
     SystemZone,
-    Settings,
+    Settings
 }
 
 export default{
@@ -57,54 +55,3 @@ declare module "@vue/runtime-core" {
       $lx: TLuxon;
     }
 }
-
-
-  
-// export default{
-//     install:(app: App) => {
-//         function load(): typeof DateTime{
-//             return DateTime;
-//         }
-//         app.config.globalProperties.$luxon = load();        
-//     }
-// }
-// declare module "@vue/runtime-core" {
-//     //Bind to `this` keyword
-//     interface ComponentCustomProperties {
-//       $luxon: DateTime;
-//     }
-// }
-
-
-// export function loadLuxon(){
-//     return DateTime 
-// }
-
-// declare module "@vue/runtime-core" {
-//     //Bind to `this` keyword
-//     interface ComponentCustomProperties {
-//       $luxon: DateTime;
-//     }
-// }
-
-
-// import VueLuxon from "vue-luxon";
-// import { App } from 'vue';
-
-// export default{
-//     install:(app: App) => {
-//         function load(): VueLuxon{
-//             //return VueLuxon;
-//             VueLuxon.install
-//             console.log(VueLuxon)
-//             return VueLuxon.vueluxon;
-//         }
-//         app.config.globalProperties.$luxon = load();        
-//     }
-// }
-// declare module "@vue/runtime-core" {
-//     //Bind to `this` keyword
-//     interface ComponentCustomProperties {
-//       $luxon: VueLuxon;
-//     }
-// }
