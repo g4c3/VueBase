@@ -2,12 +2,15 @@ import { useKeycloak } from "@baloise/vue-keycloak";
 import { KeycloakInstance } from "keycloak-js";
 import { computed, ComputedRef, Ref } from 'vue';
 
-export function keycloakObject() {
+export function keycloakObject(): IKeycloak {
     const {
         username,
         keycloak,
         hasRoles,
-        isAuthenticated
+        isAuthenticated,
+        hasFailed,
+        isPending,
+        roles        
     } = useKeycloak();
     
     const tempToken = computed(() => keycloak.token);

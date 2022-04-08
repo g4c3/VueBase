@@ -11,6 +11,7 @@
     "@baloise/vue-keycloak": "^1.5.0",
     "axios": "^0.26.1",
     "core-js": "^3.8.3",
+    "guid-typescript": "^1.0.9",
     "jwt-decode": "^3.1.2",
     "keycloak-js": "^17.0.1",
     "lodash": "^4.17.21",

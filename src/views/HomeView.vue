@@ -6,7 +6,8 @@
     <br>
     {{time}}
     <br>
-    <!-- {{this.keycloak.kcInstance}} -->
+    <!-- {{this.keycloak.kcInstance().authenticated}} -->
+    <!-- {{this.keycloak.keycloak}} -->
     <button type="button" @click="logout"> {{ $t("logoutBtn") }} </button>
   </div>
 </template>
@@ -15,7 +16,8 @@
 import { defineComponent } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import WellcomeView from '../components/WellcomeView.vue';
-import { keycloakObject, IKeycloak } from '@/services/keycloak'
+// import keycloak from '@/modules/keycloak/keycloak';
+// import { IKeycloak, keycloakObject } from '@/services/keycloak'
 
 export default defineComponent({
   name: 'HomeView',
@@ -24,16 +26,17 @@ export default defineComponent({
   },
   data() {
     return {
-      keycloak: keycloakObject() as IKeycloak
+      // keycloak: keycloakObject() as IKeycloak
     }
   },
   methods:{
     logout(){
-      this.keycloak!.kcInstance.logout()
+      // this.keycloak!.kcInstance.logout()
+      
     }
   },
   computed: {
-    time(): string{
+    time(): string {
       let currentTime = this.$luxeon.DateTime.now().toString()
       return currentTime
     }

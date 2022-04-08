@@ -1,14 +1,17 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
+import * as keycloakObject from '@/services/keycloak'
+
+const keycloak = keycloakObject;
 
 const routes: Array<RouteRecordRaw> = [
   {
     path: '/',
     name: 'home',
     component: HomeView,
-    // meta: {
-    //   requiresAuth: false
-    // }
+    meta: {
+      requiresAuth: false
+    }
   },
   {
     path: '/about',
@@ -30,18 +33,29 @@ const router = createRouter({
   routes
 })
 
-// router.beforeEach((to, from, next) => {
-//   if (to.matched.some(record => record.meta.requiresAuth)) {
-//     if (router.app.$keycloak.authenticated) {
-//       next()
-//     } else {
-//       const loginUrl = router.app.$keycloak.createLoginUrl()
-//       window.location.replace(loginUrl)
-//     }
-//   } else {
-//     next()
-//   }
-// })
+router.beforeEach((to, from, next) => {
+  console.log(keycloak)
+  // console.log(keycloak.kcInstance.token)
+  
+  next()
+  // if (to.matched.some(record => record.meta.requiresAuth)) {
+  //   console.log(to.name)
+  //   if (keycloak.kcInstance.authenticated) {
+  //     next()
+  //   } else {
+  //     const loginUrl = keycloak.kcInstance.createLoginUrl()
+  //     window.location.replace(loginUrl)
+  //   }
+  // } else {
+  //   next()
+  // }
+})
+
+router.afterEach((to, from, next) => {
+  console.log(keycloak)
+  // console.log(keycloak.kcInstance.token)
+  // alert(keycloak.isAuth.value.value)
+})
 
 // router.beforeEach((to, from, next) => {
 // if(to.matched.some(record => record.meta.requiresAuth)){

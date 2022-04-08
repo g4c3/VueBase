@@ -6,6 +6,36 @@
   <router-view/>
 </template>
 
+<script lang="ts">
+import { computed, defineComponent } from "vue";
+import { useKeycloak } from "@baloise/vue-keycloak";
+
+export default defineComponent({
+  name: "App",
+  
+  setup() {
+    const {
+      username,
+      keycloak,
+      hasRoles,
+    } = useKeycloak();
+
+    const tempToken = computed(() => keycloak.token);
+    const hasAccess = computed(() => hasRoles(["Contributor"]));
+    const name = computed(() => username);
+
+    console.log(tempToken.value);
+
+    return {
+      hasAccess,
+      name,
+      tempToken,
+    };
+  },
+});
+</script>
+
+
 <style lang="scss">
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;

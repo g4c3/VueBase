@@ -15,7 +15,8 @@ export default{
                 url: 'http://localhost:8080/auth/',
                 realm: 'Gifts',
                 clientId: 'mirenaET',
-            }            
+            },
+                     
         })        
     }
 }
