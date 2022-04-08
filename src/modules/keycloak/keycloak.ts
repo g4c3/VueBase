@@ -10,11 +10,20 @@ const keycloakOptions = {
 }
 
 const keycloak = Keycloak(keycloakOptions)
-keycloak.init({onLoad: 'login-required'}).then((auth) => {
+keycloak.init({
+  onLoad: 'login-required', 
+  enableLogging: true,
+  checkLoginIframe: true,
+}).then((auth) => {
     if (!auth) {
       window.location.reload();
-    } else {
-    //   console.log("Authenticated");
+    } else 
+    {
+      if (keycloak.token) {
+        // console.log(keycloak.authenticated);
+        // console.log(auth);
+        window.localStorage.setItem('keycloakToken', keycloak.token)
+      }
     }  
   
     //Token Refresh
@@ -34,11 +43,13 @@ keycloak.init({onLoad: 'login-required'}).then((auth) => {
     // console.log("Authenticated Failed");
 })
 
+export const isAuthenticated = keycloak.authenticated;
+
 export default{
     install:(app: App) => {
         function load(): KeycloakInstance{
             return keycloak
-        }    
+        }
         app.config.globalProperties.$keycloak = load();
     }
 };
