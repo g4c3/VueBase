@@ -6,15 +6,8 @@
     <br>
     {{time}}
     <br>
-    {{this.$keycloak.authenticated}} - {{'directly'}}
-    <br>
-    <!-- {{this.$keycloak.token}} -->
-    <!-- {{isLogged}}-->
-    {{isLogged}} - {{'through computed'}}
-    <br>
-    {{isAuthenticated}} - {{'through data'}}
-    <br>
-    <button type="button" @click="logOut"> {{$t("logoutBtn")}} </button>
+    <!-- {{this.keycloak.kcInstance}} -->
+    <button type="button" @click="logout"> {{ $t("logoutBtn") }} </button>
   </div>
 </template>
 
@@ -22,6 +15,7 @@
 import { defineComponent } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import WellcomeView from '../components/WellcomeView.vue';
+import { keycloakObject, IKeycloak } from '@/services/keycloak'
 
 export default defineComponent({
   name: 'HomeView',
@@ -30,29 +24,20 @@ export default defineComponent({
   },
   data() {
     return {
-      isAuthenticated: null as (boolean | null | undefined)
+      keycloak: keycloakObject() as IKeycloak
     }
   },
   methods:{
-    logOut(){
-      this.$keycloak.logout()
-    },
-    loadAuth(){
-      this.isAuthenticated = this.$keycloak.authenticated;
-    }  
+    logout(){
+      this.keycloak!.kcInstance.logout()
+    }
   },
   computed: {
     time(): string{
       let currentTime = this.$luxeon.DateTime.now().toString()
       return currentTime
-    },
-    isLogged():boolean|undefined{
-      return this.$keycloak.authenticated;
     }
   },
-  async created(){
-    this.loadAuth();
-  }
 });
 </script>
 
