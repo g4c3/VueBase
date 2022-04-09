@@ -9,10 +9,10 @@
     {{this.$keycloak.authenticated}} - {{'directly'}}
     <br>
     <!-- {{this.$keycloak.token}} -->
-    <!-- {{isLogged}}-->
-    {{isLogged}} - {{'through computed'}}
-    <br>
-    {{isAuthenticated}} - {{'through data'}}
+    <!-- {{this.$keycloak}} -->
+    <!-- {{isLogged}} - {{'through computed'}}
+    <br> -->
+    <!-- {{isAuthenticated}} - {{'through data'}}  -->
     <br>
     <button type="button" @click="logOut"> {{$t("logoutBtn")}} </button>
   </div>
@@ -30,29 +30,29 @@ export default defineComponent({
   },
   data() {
     return {
-      isAuthenticated: null as (boolean | null | undefined)
+      // isAuthenticated: this.$keycloak
     }
   },
   methods:{
     logOut(){
       this.$keycloak.logout()
     },
-    loadAuth(){
-      this.isAuthenticated = this.$keycloak.authenticated;
-    }  
+    // loadAuth(){
+    //   this.isAuthenticated = this.$keycloak;
+    // }  
   },
   computed: {
     time(): string{
       let currentTime = this.$luxeon.DateTime.now().toString()
       return currentTime
     },
-    isLogged():boolean|undefined{
-      return this.$keycloak.authenticated;
-    }
+    // isLogged():boolean|undefined{
+    //   return this.$keycloak.authenticated;
+    // }
   },
-  async created(){
-    this.loadAuth();
-  }
+  // async created(){
+  //   this.loadAuth();
+  // }
 });
 </script>
 
