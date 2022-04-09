@@ -16,13 +16,10 @@ const keycloak = Keycloak(keycloakOptions)
 const app = createApp(App)
 
 keycloak.init({
-    onLoad: 'login-required', 
     enableLogging: true,
-    checkLoginIframe: true,
-}).then(async (auth) => {
-    if (!auth) {
-        window.location.reload();
-    } else if(auth) {
+    checkLoginIframe: false,
+}).then(
+    async (auth) => {
         app.config.globalProperties.$keycloak = keycloak
         app.use(store)
         app.use(createVueRouter.install(app))    
@@ -36,23 +33,25 @@ keycloak.init({
         {
             window.localStorage.setItem('keycloakToken', keycloak.token)
         }
+
+    if(auth) {
+        setInterval(() => {
+            keycloak.updateToken(70).then((refreshed) => {
+                if (refreshed) {
+                    console.log('Token not refreshed')
+                } else {
+                    console.log('Token not refreshed, valid for ' + keycloak.tokenParsed?.exp  + ' seconds');
+                }
+            }).catch((e) => {
+                console.log('Update failed ' + e);
+            });
+        }, 6000)
     }
-
-    setInterval(() => {
-        keycloak.updateToken(70).then((refreshed) => {
-            if (refreshed) {
-                console.log('Token not refreshed')
-            } else {
-                console.log('Token not refreshed, valid for ' + keycloak.tokenParsed?.exp  + ' seconds');
-            }
-        }).catch((e) => {
-            console.log('Update failed' + e);
-        });
-    }, 6000)
-
 }).catch((e) => {
     console.log('Authenticated Failed', e);
 })
+
+//TODO: keycloak.onAuthLogout
 
 declare module "@vue/runtime-core" {
     interface ComponentCustomProperties {

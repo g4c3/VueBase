@@ -1,16 +1,18 @@
 import { createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import { App } from 'vue';
+import { KeycloakInstance } from 'keycloak-js';
 
 const createRoutes = (app: App) => {
-  //TODO: finish the configurations logic
+  const keycloak: KeycloakInstance = app.config.globalProperties.$keycloak;
   const preventRoutes = {
     beforeEnter(to, from, next) {
       if(to.meta.requiresAuth){
-        if (app.config.globalProperties.$keycloak.authenticated) {
+        if (keycloak.authenticated) {
           next();
         } else {
-          next("/");
+          const redirectUrl = `${window.location.origin}/${to.path}`
+          keycloak.login({redirectUri: redirectUrl})
         }
       } else if(!to.meta.requiresAuth) {
         next();
@@ -34,7 +36,7 @@ const createRoutes = (app: App) => {
       meta: {
         requiresAuth: true
       },
-      component: () => import(/* webpackChunkName: "about" */ '@/views/AboutView.vue'),
+      component: () => import('@/views/AboutView.vue'),   ///* webpackChunkName: "about" */ 
       ...preventRoutes
     },
     {
@@ -53,7 +55,6 @@ export default {
   install:(app: App): Router => {
     function create(): Router {
       const router = createRouter({
-        // mode: RouterOptions.history,
         history: createWebHistory(),
         routes: createRoutes(app)
       });
