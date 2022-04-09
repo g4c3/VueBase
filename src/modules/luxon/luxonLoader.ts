@@ -43,13 +43,13 @@ export default{
         function load(): TLuxon{
             return luxon
         }
-        app.config.globalProperties.$luxeon = load();
+        app.config.globalProperties.$luxon = load();
     }    
 };
 
 declare module "@vue/runtime-core" {
     //Bind to `this` keyword
     interface ComponentCustomProperties {
-      $luxeon: TLuxon;
+      $luxon: TLuxon;
     }
 }
