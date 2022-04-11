@@ -12,6 +12,7 @@ import luxonLoader from './modules/luxon/luxonLoader';
 import Keycloak, { KeycloakInstance } from "keycloak-js";
 import { keycloakOptions } from './configs/keycloak';
 
+//TODO: c   heck if keycloak is running
 const keycloak = Keycloak(keycloakOptions)
 const app = createApp(App)
 
@@ -57,3 +58,4 @@ declare module "@vue/runtime-core" {
       $keycloak: KeycloakInstance;
     }
 }
+debugger;
