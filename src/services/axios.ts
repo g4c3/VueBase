@@ -18,7 +18,7 @@ const axiosApiInstance = axios.create()
 
 export async function get<T>(url: string, params?: any): Promise<T> {
     try {
-        let response = await axiosApiInstance.get(url, { params });
+        const response = await axiosApiInstance.get(url, { params });
         return response.data;
     }
     catch (error) {
