@@ -5,10 +5,10 @@
 // });
 
 
-chrome.runtime.onMessage.addListener(function(rq, sender, sendResponse) {
-    console.log("background loaded")
-    setTimeout(function() {
-        sendResponse({status: true});
-    }, 1);
-    return true;  // Return true to fix the error
-});
+// chrome.runtime.onMessage.addListener(function(rq, sender, sendResponse) {
+//     console.log("background loaded")
+//     setTimeout(function() {
+//         sendResponse({status: true});
+//     }, 1);
+//     return true;  // Return true to fix the error
+// });
