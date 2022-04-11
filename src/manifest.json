@@ -14,6 +14,14 @@
     "48": "icons/48.png",
     "128": "icons/128.png"
   },
+  "content_scripts": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "js": ["js/content-script.js"]
+    }
+  ],
   "background": {
     "scripts": [
       "js/background.js"

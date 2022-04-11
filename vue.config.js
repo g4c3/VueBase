@@ -8,6 +8,10 @@ module.exports = defineConfig({
 
   pluginOptions: {
     browserExtension: {
+      components: {
+        background: true,
+        contentScripts: true
+      },
       componentOptions: {
         background: {
           entry: 'src/background.ts'
