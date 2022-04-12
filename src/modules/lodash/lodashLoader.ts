@@ -3,10 +3,7 @@ import { App } from 'vue';
 
 export default {
   install:(app: App) => {
-    function load(): LoDashStatic{
-      return _;
-    }
-    app.config.globalProperties.$_ = load();
+    app.config.globalProperties.$_ = Object.assign({}, _)
   }
 }
 declare module "@vue/runtime-core" {
