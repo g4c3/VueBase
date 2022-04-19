@@ -7,8 +7,10 @@ export interface IAuthorization {
 export interface IUser {
     emailAddress: string | null | undefined;
     name: string | null;
-    token: string | null;
+    token: string | null | undefined;
     loginRoles: Role[] | null;    
 }
 
-export interface IRootState {}
+export interface IRootState {
+    //authorization: IAuthorization
+}

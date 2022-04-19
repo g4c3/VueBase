@@ -1,5 +1,9 @@
 import { createStore, Module, ActionContext, Store } from 'vuex';
-import { IAuthorization, IUser, IRootState } from '../../interfaces/inteffaces';
+import { IAuthorization, IUser, IRootState } from '../../interfaces/intefaces';
+import createPersistedState from "vuex-persistedstate";
+import SecureLS from "secure-ls";
+
+const ls = new SecureLS({ isCompression: false });
 
 export const authorization: Module<IAuthorization, IRootState> = {
   namespaced: true,
@@ -27,6 +31,9 @@ export const authorization: Module<IAuthorization, IRootState> = {
     }
   },
   mutations: {
+    OVERWRITE_STATE(state, payload: IAuthorization){
+      state = payload
+    },
     INITIATE_LOGIN(state, payload: IUser){
       state.isAuthenticated = true,
       state.user.name = payload.name,
@@ -52,10 +59,26 @@ export const authorization: Module<IAuthorization, IRootState> = {
   }
 }
 
+const vuexLocal = createPersistedState<IRootState>(
+  {
+    paths: ['authorization'],
+    storage: {
+      getItem: (key) => ls.get(key)
+      ,
+      setItem: (key, value) => ls.set(key, value),
+      removeItem: (key) => ls.remove(key),
+    }
+    // ,
+    // getState: (key) => ls.get(key),
+    // setState: (key, value) => ls.set(key, value)
+});
+
 export const store = createStore<IRootState>({
   modules: {
     authorization
-  }
+  },  
+  plugins: [vuexLocal],
+  strict: true
 })
 
 declare module '@vue/runtime-core' {

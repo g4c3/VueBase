@@ -7,6 +7,7 @@
     {{time}}
     <br>
     {{this.$keycloak.authenticated}} - {{'directly'}}
+    {{this.$store}}
     <button type="button" @click="logOut"> {{$t("logoutBtn")}} </button>
   </div>
 </template>
@@ -15,6 +16,7 @@
 import { defineComponent } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import WellcomeView from '../components/WellcomeView.vue';
+import { useStore } from "vuex";
 
 export default defineComponent({
   name: 'HomeView',
@@ -26,7 +28,8 @@ export default defineComponent({
   },
   methods:{
     logOut(){
-      this.$keycloak.logout()
+      this.$store.dispatch('authorization/logout');
+      this.$keycloak.logout();
     },
   },
   computed: {
@@ -35,6 +38,9 @@ export default defineComponent({
       return currentTime
     },
   },
+  setup(){
+    const store = useStore();
+  }
   // async created(){}
 });
 </script>
