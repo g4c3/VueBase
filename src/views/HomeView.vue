@@ -3,12 +3,6 @@
     <img v-svg-inline class="icon" src="../assets/logo-vue.svg" alt="example svg image" />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <WellcomeView msg="And from welcome page"/>
-    <!-- <br>
-    {{time}}
-    <br>
-    {{this.$keycloak.authenticated}} - {{'directly'}}
-    {{this.$store}} -->
-    <button type="button" @click="logout"> {{$t("logoutBtn")}} </button>
   </div>
 </template>
 
@@ -26,16 +20,8 @@ export default defineComponent({
     return {}
   },
   methods:{
-    logout(){
-      this.$store.dispatch('authorization/logout');
-      this.$keycloak.logout();
-    },
   },
   computed: {
-    time(): string{
-      let currentTime = this.$luxon.DateTime.now().toString()
-      return currentTime
-    },
   },
 });
 </script>
