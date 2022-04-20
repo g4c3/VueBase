@@ -1,7 +1,7 @@
 import { createStore, Module, ActionContext, Store } from 'vuex';
 import { IAuthorization, IUser, IRootState } from '../../interfaces/intefaces';
-import createPersistedState from "vuex-persistedstate";
-import SecureLS from "secure-ls";
+import createPersistedState from 'vuex-persistedstate';
+import SecureLS from 'secure-ls';
 
 const ls = new SecureLS({ isCompression: false });
 

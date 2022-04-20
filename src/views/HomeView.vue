@@ -16,7 +16,6 @@
 import { defineComponent } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import WellcomeView from '../components/WellcomeView.vue';
-import { useStore } from "vuex";
 
 export default defineComponent({
   name: 'HomeView',
@@ -38,10 +37,6 @@ export default defineComponent({
       return currentTime
     },
   },
-  setup(){
-    const store = useStore();
-  }
-  // async created(){}
 });
 </script>
 

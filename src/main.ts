@@ -23,6 +23,7 @@ keycloak.init({
     onLoad: 'check-sso'
 }).then(
     async (auth) => {
+        
         app.config.globalProperties.$keycloak = keycloak;
         const router = createVueRouter(app, store);  
         app.use(store)
@@ -33,20 +34,18 @@ keycloak.init({
         app.use(VueSvgInlinePlugin)
         app.use(luxonLoader)
         app.mount('#app')
+
+        tokenInterceptor()
         if(keycloak.token)
         {     
-            setUserData();
+            await setUserData();
         }
     if(auth) {
         updateToken()
     }
-    if(!auth){
-        console.log('not auth')
-    }
 }).catch((e) => {
     console.log('Authenticated Failed', e);
 })
-
 
 declare module "@vue/runtime-core" {
     interface ComponentCustomProperties {
@@ -67,7 +66,7 @@ async function setUserData() {
     app.config.globalProperties.$store.dispatch('authorization/login', user)
 }
 
-function updateToken(){
+function updateToken() {
     setInterval(() => {
         keycloak.updateToken(70).then((refreshed) => {
             if (refreshed) {
@@ -79,4 +78,15 @@ function updateToken(){
             console.log('Update failed ' + e);
         });
     }, 6000)
+}
+
+function tokenInterceptor() {
+    axios.interceptors.request.use(config => {
+      if (app.config.globalProperties.$keycloak.authenticated) {
+        config.headers!.Authorization = `Bearer ${app.config.globalProperties.$keycloak.token}`;
+      }
+      return config;
+    }, error => {
+      return Promise.reject(error);
+    })
 }

@@ -12,16 +12,17 @@
     "core-js": "^3.8.3",
     "guid-typescript": "^1.0.9",
     "keycloak-js": "^17.0.1",
-    "laravel-mix": "^6.0.43",
     "lodash": "^4.17.21",
     "luxon": "^2.3.1",
     "register-service-worker": "^1.7.2",
+    "secure-ls": "^1.2.6",
     "vue": "^3.2.13",
     "vue-axios": "^3.4.1",
     "vue-i18n": "^9.1.9",
     "vue-router": "^4.0.3",
     "vue-svg-inline-plugin": "^2.2.0",
-    "vuex": "^4.0.0"
+    "vuex": "^4.0.0",
+    "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.181",

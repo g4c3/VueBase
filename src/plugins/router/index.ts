@@ -52,21 +52,6 @@ const createRoutes = (app: App, store) => {
   ] as Array<RouteRecordRaw>;
 }
 
-// export default {
-//   install:(app: App): Router => {
-//     function create(): Router {
-//       const router = createRouter({
-//         history: createWebHistory(),
-//         routes: createRoutes(app)
-//       });
-//       return router;
-//     }
-//     return create(); 
-//   }
-// }
-
-
-
 export default function router(app, store) {
   const router = createRouter({
     history: createWebHistory(),
