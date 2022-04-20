@@ -1,5 +1,6 @@
 {
     "message": "hello i18n !!",
     "welcome": "Welcome",
-    "logoutBtn": "Logout Button"
+    "logoutBtn": "Logout",
+    "loginBtn": "Login"
 }

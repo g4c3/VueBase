@@ -3,11 +3,11 @@
     <img v-svg-inline class="icon" src="../assets/logo-vue.svg" alt="example svg image" />
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <WellcomeView msg="And from welcome page"/>
-    <br>
+    <!-- <br>
     {{time}}
     <br>
     {{this.$keycloak.authenticated}} - {{'directly'}}
-    {{this.$store}}
+    {{this.$store}} -->
     <button type="button" @click="logout"> {{$t("logoutBtn")}} </button>
   </div>
 </template>
