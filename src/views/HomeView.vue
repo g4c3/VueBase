@@ -1,6 +1,6 @@
 <template>
   <div class="home">
-    <img v-svg-inline class="icon" src="../assets/logo-vue.svg" alt="example svg image" />
+    <!-- <img v-svg-inline class="icon" src="../assets/logo-vue.svg" alt="example svg image" /> -->
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <WellcomeView msg="And from welcome page"/>
   </div>

@@ -1,5 +1,7 @@
-import { createApp } from 'vue';
-import App from './App.vue';
+import { createApp } from 'vue'
+import App from './App.vue'
+import vuetify from './plugins/vuetify'
+import { loadFonts } from './plugins/webfontloader'
 import './registerServiceWorker';
 import createVueRouter from './plugins/router/index';
 import _ from './modules/lodash/lodashLoader';
@@ -16,6 +18,7 @@ import { Role } from './roles/roles';
 
 const keycloak = Keycloak(keycloakOptions);
 const app = createApp(App);
+loadFonts()
 
 keycloak.init({
     enableLogging: true,
@@ -33,6 +36,7 @@ keycloak.init({
         app.use(VueAxios, axios)
         app.use(VueSvgInlinePlugin)
         app.use(luxonLoader)
+        app.use(vuetify)
         app.mount('#app')
 
         tokenInterceptor()
@@ -68,7 +72,7 @@ async function setUserData() {
 
 function updateToken() {
     setInterval(() => {
-        keycloak.updateToken(70).then((refreshed) => {
+        keycloak.updateToken(3600).then((refreshed) => {
             if (refreshed) {
                 console.log('Token not refreshed')
             } else {
@@ -77,7 +81,7 @@ function updateToken() {
         }).catch((e) => {
             console.log('Update failed ' + e);
         });
-    }, 6000)
+    }, 3600000)
 }
 
 function tokenInterceptor() {

@@ -20,11 +20,13 @@ export default defineComponent({
         return {}
     },
     methods:{
-        logout(){
+        logout() {
             this.$store.dispatch('authorization/logout');
-            this.$keycloak.logout();
+            this.$keycloak.logout({
+                redirectUri:  `${window.location.origin}home`
+            });
         },
-        login(){
+        login() {
             this.$keycloak.login().then((success) => {
                 console.log("success " + success)
             })
