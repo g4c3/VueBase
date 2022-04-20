@@ -12,8 +12,7 @@ const createRoutes = (app: App, store) => {
           next();
         } else {
           const redirectUrl = `${window.location.origin}/${to.path}`
-          keycloak
-            .login({redirectUri: redirectUrl})          
+          app.config.globalProperties.$keycloak.login({redirectUri: redirectUrl})          
         }
       } else if(!to.meta.requiresAuth) {
         next();
