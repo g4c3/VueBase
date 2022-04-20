@@ -68,9 +68,6 @@ const vuexLocal = createPersistedState<IRootState>(
       setItem: (key, value) => ls.set(key, value),
       removeItem: (key) => ls.remove(key),
     }
-    // ,
-    // getState: (key) => ls.get(key),
-    // setState: (key, value) => ls.set(key, value)
 });
 
 export const store = createStore<IRootState>({

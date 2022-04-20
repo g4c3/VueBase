@@ -8,7 +8,7 @@
     <br>
     {{this.$keycloak.authenticated}} - {{'directly'}}
     {{this.$store}}
-    <button type="button" @click="logOut"> {{$t("logoutBtn")}} </button>
+    <button type="button" @click="logout"> {{$t("logoutBtn")}} </button>
   </div>
 </template>
 
@@ -27,7 +27,7 @@ export default defineComponent({
     return {}
   },
   methods:{
-    logOut(){
+    logout(){
       this.$store.dispatch('authorization/logout');
       this.$keycloak.logout();
     },

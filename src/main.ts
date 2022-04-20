@@ -14,11 +14,8 @@ import { keycloakOptions } from './configs/keycloak';
 import { IUser } from './interfaces/intefaces';
 import { Role } from './roles/roles';
 
-//TODO: check if keycloak is running
-
 const keycloak = Keycloak(keycloakOptions);
-  
-
+const app = createApp(App);
 
 keycloak.init({
     enableLogging: true,
@@ -26,7 +23,6 @@ keycloak.init({
     onLoad: 'check-sso'
 }).then(
     async (auth) => {
-        const app = createApp(App);
         app.config.globalProperties.$keycloak = keycloak;
         const router = createVueRouter(app, store);  
         app.use(store)
@@ -37,14 +33,9 @@ keycloak.init({
         app.use(VueSvgInlinePlugin)
         app.use(luxonLoader)
         app.mount('#app')
-        keycloak.onAuthLogout = function ()
-        {
-            //app.config.globalProperties.$store.dispatch('authorization/logout')
-            console.log("onAuthLogout")
-        }
         if(keycloak.token)
         {     
-            setUserData(app);
+            setUserData();
         }
     if(auth) {
         updateToken()
@@ -56,7 +47,6 @@ keycloak.init({
     console.log('Authenticated Failed', e);
 })
 
-//TODO: keycloak.onAuthLogout
 
 declare module "@vue/runtime-core" {
     interface ComponentCustomProperties {
@@ -64,7 +54,7 @@ declare module "@vue/runtime-core" {
     }
 }
 
-async function setUserData(app) {
+async function setUserData() {
     const roles = app.config.globalProperties.$_
                     .intersection(keycloak.realmAccess?.roles, Object.values(Role));
     const userProfile = await keycloak.loadUserProfile();
@@ -90,24 +80,3 @@ function updateToken(){
         });
     }, 6000)
 }
-const y = keycloak.onAuthLogout = function ()
-{
-    //app.config.globalProperties.$store.dispatch('authorization/logout')
-    console.log("onAuthLogout")
-}
- keycloak.onAuthLogout = updateState
-
- function updateState() {
-    if (keycloak.authenticated) {
-        console.log("keycloak.authenticated")
-    } else {
-        console.log('not-authenticated');
-    }
-    alert(keycloak.authenticated);
-}
-keycloak.onAuthSuccess = () => {
-    console.log('onAuthSuccess');
-};
-
-
-// debugger;
