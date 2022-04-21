@@ -16,6 +16,7 @@ import { Role } from './roles/roles';
 import vuetify, { loadFontAwesome } from './plugins/vuetify/vuetify';
 import { loadFonts } from './plugins/vuetify/webfontloader';
 
+
 const keycloak = Keycloak(keycloakOptions);
 const app = createApp(App);
 

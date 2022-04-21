@@ -60,4 +60,3 @@ export default function router(app, store) {
   return router;
 }
 
-//debugger;

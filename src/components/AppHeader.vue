@@ -3,8 +3,23 @@
         <div class="header-container">
 
             <h1>Podaryci za vseki</h1>
-            <button v-if="isAuthenticated" type="button" class="header-buttons" @click="logout"> {{$t("logoutBtn")}} </button>
-            <button v-if="!isAuthenticated" type="button" class="header-buttons" @click="login"> {{$t("loginBtn")}} </button>
+            <div>
+                <button v-if="isAuthenticated" 
+                    type="button" 
+                    class="header-buttons" 
+                    @click="logout"> 
+                    {{$t("logoutBtn")}} 
+                    <v-icon icon="mdi-logout" />
+                </button>            
+                <button v-if="!isAuthenticated" 
+                    type="button" 
+                    class="header-buttons" 
+                    @click="login"> 
+                    {{$t("loginBtn")}} 
+                    <v-icon icon="mdi-login" />
+                </button>
+            </div>
+            
         </div>
     </header>
 </template>
@@ -56,7 +71,6 @@ export default defineComponent({
             position: absolute;
             top:0;
             right:0;
-            background-color: #0ac7e0;
             border: none
         }
     }
