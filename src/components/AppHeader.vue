@@ -3,6 +3,7 @@
         <div class="header-container">
 
             <h1>Podaryci za vseki</h1>
+            <v-btn @click="toggleTheme">toggle theme</v-btn>
             <div>
                 <button v-if="isAuthenticated" 
                     type="button" 
@@ -26,7 +27,7 @@
 
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, ref } from 'vue';
 import { mapGetters } from 'vuex';
 
 export default defineComponent({
@@ -42,10 +43,11 @@ export default defineComponent({
             });
         },
         login() {
-            this.$keycloak.login().then((success) => {
-                console.log("success " + success)
-            })
-        }
+            this.$keycloak.login()
+        },
+        toggleTheme() {
+            this.$store.commit('authorization/TOGGLE_THEME')
+        },
     },
     computed: {
         isLoggedIn(): boolean {

@@ -2,7 +2,9 @@ import { Role } from '../roles/roles';
 
 export interface IAuthorization {    
     isAuthenticated: boolean,
-    user: IUser}
+    user: IUser,
+    theme: string | null
+}
 
 export interface IUser {
     emailAddress: string | null | undefined;
@@ -12,5 +14,5 @@ export interface IUser {
 }
 
 export interface IRootState {
-    //authorization: IAuthorization
+    authorization: IAuthorization
 }

@@ -14,7 +14,8 @@ export const authorization: Module<IAuthorization, IRootState> = {
       emailAddress: null,
       name: null,
       token: null,
-    }
+    },
+    theme: 'lightTheme'
   },
   getters: {
     isAuthenticated(state) {
@@ -28,26 +29,32 @@ export const authorization: Module<IAuthorization, IRootState> = {
     },
     getUserName(state) {
       return state.user.name;
+    },
+    getUserTheme(state) {
+      return state.theme;
     }
   },
   mutations: {
-    OVERWRITE_STATE(state, payload: IAuthorization){
+    OVERWRITE_STATE(state, payload: IAuthorization) {
       state = payload
     },
-    INITIATE_LOGIN(state, payload: IUser){
+    INITIATE_LOGIN(state, payload: IUser) {
       state.isAuthenticated = true,
       state.user.name = payload.name,
       state.user.emailAddress = payload.emailAddress,
       state.user.loginRoles = payload.loginRoles,
       state.user.token = payload.token
     },
-    INITIATE_LOGOUT(state){
+    INITIATE_LOGOUT(state) {
       state.isAuthenticated = false,
       state.user.name = '',
       state.user.emailAddress = '',
       state.user.loginRoles = null,
       state.user.token = ''
     },
+    TOGGLE_THEME(state) {
+      state.theme === 'lightTheme' ? state.theme = 'dark' : state.theme = 'lightTheme'
+    }
   },
   actions: {
     login({ commit }: ActionContext<IAuthorization, IRootState>, payload: IUser): void {

@@ -1,5 +1,5 @@
 <template>
-  <v-app id="app">
+  <v-app id="app" :theme="getTheme">
     <v-main>
       <AppHeader/>
       <nav>
@@ -13,22 +13,24 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import { defineComponent, ref  } from 'vue'
 // import HelloWorld from './components/HelloWorld.vue'
 import AppHeader from '@/components/AppHeader.vue';
 
 export default defineComponent({
   name: 'App',
-
   components: {
     AppHeader       // HelloWorld, 
   },
-
   data () {
-    return {
-      //
-    }
+    return {}
   },
+  computed: {
+    getTheme() {
+      const theme = this.$store.getters['authorization/getUserTheme']
+      return theme;
+    }
+  }
 })
 </script>
 <style lang="scss">
