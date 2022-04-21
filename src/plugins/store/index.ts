@@ -15,7 +15,7 @@ export const authorization: Module<IAuthorization, IRootState> = {
       name: null,
       token: null,
     },
-    theme: 'lightTheme'
+    theme: null
   },
   getters: {
     isAuthenticated(state) {
@@ -31,7 +31,7 @@ export const authorization: Module<IAuthorization, IRootState> = {
       return state.user.name;
     },
     getUserTheme(state) {
-      return state.theme;
+      return state.theme === null ? 'lightTheme' : state.theme;
     }
   },
   mutations: {

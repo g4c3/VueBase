@@ -50,4 +50,3 @@ export function loadFontAwesome(app: App) {
 }
 
 // https://vuetifyjs.com/en/introduction/why-vuetify/#feature-guides
-debugger;

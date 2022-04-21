@@ -1,33 +1,27 @@
 <template>
     <header class="header">
-        <div class="header-container">
-
-            <h1>Podaryci za vseki</h1>
-            <v-btn @click="toggleTheme">toggle theme</v-btn>
-            <div>
-                <button v-if="isAuthenticated" 
-                    type="button" 
-                    class="header-buttons" 
-                    @click="logout"> 
-                    {{$t("logoutBtn")}} 
-                    <v-icon icon="mdi-logout" />
-                </button>            
-                <button v-if="!isAuthenticated" 
-                    type="button" 
-                    class="header-buttons" 
-                    @click="login"> 
-                    {{$t("loginBtn")}} 
-                    <v-icon icon="mdi-login" />
-                </button>
-            </div>
-            
-        </div>
-    </header>
+        <h1 class="header-1">Podaryci za vseki</h1>
+        <v-btn class="header-2"  @click="toggleTheme">toggle theme</v-btn>
+        <v-btn v-if="isAuthenticated" 
+            type="button" 
+            class="header-3" 
+            @click="logout"> 
+            {{$t("logoutBtn")}} 
+            <v-icon icon="mdi-logout" />
+        </v-btn>            
+        <v-btn v-if="!isAuthenticated" 
+            type="button" 
+            class="header-3" 
+            @click="login"> 
+            {{$t("loginBtn")}} 
+            <v-icon icon="mdi-login" />
+        </v-btn>
+</header>
 </template>
 
 
 <script lang="ts">
-import { defineComponent, ref } from 'vue';
+import { defineComponent } from 'vue';
 import { mapGetters } from 'vuex';
 
 export default defineComponent({
@@ -66,14 +60,35 @@ export default defineComponent({
         position: sticky;
         color: black;
         width: 100%;
-        height: auto;
+        height: 160px;
         line-height: 1;
-        display: inline-flex;
+        display: inline-grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
+        grid-template-rows: 1fr 1fr 1fr;
+        grid-row-gap: 10px;
+        grid-column-gap: 3px;
+        padding-bottom: 10px;
+        padding-top: 10px;
+        grid-row: start;
+        &-1 {
+            grid-column:  1;
+            grid-row: 1;            
+            justify-self: center;
+        }
+        &-2 {
+            grid-column: 4;
+            grid-row: 3;
+            justify-self: center;
+        }
+        &-3 {
+            grid-column: 4;
+            grid-row: 1;            
+            justify-self: center;
+        }
         &-buttons {
-            position: absolute;
+            position: sticky;
             top:0;
             right:0;
-            border: none
         }
     }
 </style>
