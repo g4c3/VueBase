@@ -85,10 +85,5 @@ export default defineComponent({
             grid-row: 1;            
             justify-self: center;
         }
-        &-buttons {
-            position: sticky;
-            top:0;
-            right:0;
-        }
     }
 </style>
