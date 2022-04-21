@@ -2,5 +2,6 @@
     "message": "hello i18n !!",
     "welcome": "Welcome",
     "logoutBtn": "Logout",
-    "loginBtn": "Login"
+    "loginBtn": "Login",
+    "toggleTheme": "Toggle theme"
 }

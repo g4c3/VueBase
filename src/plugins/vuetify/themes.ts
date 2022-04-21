@@ -31,3 +31,8 @@ const lightTheme: typeof ThemeDefinition = {
 
 
 export { lightTheme }
+
+export enum Themes {
+    Dark = 'dark',
+    Light = 'lightTheme'
+}

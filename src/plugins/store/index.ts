@@ -1,7 +1,8 @@
 import { createStore, Module, ActionContext, Store } from 'vuex';
-import { IAuthorization, IUser, IRootState } from '../../interfaces/intefaces';
+import { IAuthorization, IUser, IRootState, IAppControl } from '../../interfaces/intefaces';
 import createPersistedState from 'vuex-persistedstate';
 import SecureLS from 'secure-ls';
+import { Themes } from '../vuetify/themes';
 
 const ls = new SecureLS({ isCompression: false });
 
@@ -14,8 +15,7 @@ export const authorization: Module<IAuthorization, IRootState> = {
       emailAddress: null,
       name: null,
       token: null,
-    },
-    theme: null
+    }
   },
   getters: {
     isAuthenticated(state) {
@@ -29,9 +29,6 @@ export const authorization: Module<IAuthorization, IRootState> = {
     },
     getUserName(state) {
       return state.user.name;
-    },
-    getUserTheme(state) {
-      return state.theme === null ? 'lightTheme' : state.theme;
     }
   },
   mutations: {
@@ -51,9 +48,6 @@ export const authorization: Module<IAuthorization, IRootState> = {
       state.user.emailAddress = '',
       state.user.loginRoles = null,
       state.user.token = ''
-    },
-    TOGGLE_THEME(state) {
-      state.theme === 'lightTheme' ? state.theme = 'dark' : state.theme = 'lightTheme'
     }
   },
   actions: {
@@ -66,12 +60,28 @@ export const authorization: Module<IAuthorization, IRootState> = {
   }
 }
 
+export const appManagement: Module<IAppControl, IRootState> = {
+  namespaced: true,
+  state: {    
+    theme: null
+  },
+  getters: {
+    getUserTheme(state) {
+      return state.theme === null ? Themes.Light : state.theme;
+    }
+  },
+  mutations: {
+    TOGGLE_THEME(state) {
+      state.theme === Themes.Light ? state.theme = Themes.Dark : state.theme = Themes.Light
+    }
+  }
+}
+
 const vuexLocal = createPersistedState<IRootState>(
   {
-    paths: ['authorization'],
+    paths: ['authorization', 'appManagement'],
     storage: {
-      getItem: (key) => ls.get(key)
-      ,
+      getItem: (key) => ls.get(key),
       setItem: (key, value) => ls.set(key, value),
       removeItem: (key) => ls.remove(key),
     }
@@ -79,7 +89,8 @@ const vuexLocal = createPersistedState<IRootState>(
 
 export const store = createStore<IRootState>({
   modules: {
-    authorization
+    authorization,
+    appManagement
   },  
   plugins: [vuexLocal],
   strict: true

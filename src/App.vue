@@ -27,7 +27,7 @@ export default defineComponent({
   },
   computed: {
     getTheme() {
-      const theme = this.$store.getters['authorization/getUserTheme']
+      const theme = this.$store.getters['appManagement/getUserTheme']
       return theme;
     }
   }

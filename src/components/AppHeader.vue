@@ -1,7 +1,14 @@
 <template>
     <header class="header">
-        <h1 class="header-1">Podaryci za vseki</h1>
-        <v-btn class="header-2"  @click="toggleTheme">toggle theme</v-btn>
+        <div class="header-1">  
+            <h2>Gifts</h2>          
+            <v-icon icon="$giftIcon"/>
+        </div>
+        <v-btn class="header-2"  
+            @click="toggleTheme">
+            {{ $t("toggleTheme") }}
+            <v-icon icon="$theme" />
+        </v-btn>
         <v-btn v-if="isAuthenticated" 
             type="button" 
             class="header-3" 
@@ -40,7 +47,7 @@ export default defineComponent({
             this.$keycloak.login()
         },
         toggleTheme() {
-            this.$store.commit('authorization/TOGGLE_THEME')
+            this.$store.commit('appManagement/TOGGLE_THEME')
         },
     },
     computed: {

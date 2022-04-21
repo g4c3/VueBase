@@ -18,9 +18,9 @@ import { fas } from '@fortawesome/free-solid-svg-icons'
 import { createVuetify } from 'vuetify'
 
 // Themes
-import { lightTheme } from './themes'
-import customIcon from '@/assets/icons/logout_black_24dp.vue'
-
+import { lightTheme, Themes } from './themes'
+import giftIcon from '@/assets/icons/card_giftcard_black_24dp.vue'
+import theme from '@/assets/icons/theme-light-dark.vue'
 const vuetify = createVuetify({
   icons: {
     defaultSet: 'mdi',
@@ -28,14 +28,15 @@ const vuetify = createVuetify({
       ...mdAlliases,
       ...faAlliases,
       ...mdiAlliases,
-      customIcon: customIcon //use as <v-icon icon="$customIcon" />
+      giftIcon: giftIcon, //use as <v-icon icon="$customIcon" />
+      theme: theme
     },
     sets: {
       mdi, fa, md 
     },
   },
   theme: {
-    defaultTheme: 'lightTheme',
+    defaultTheme: Themes.Light,
     themes: {
       lightTheme
     }

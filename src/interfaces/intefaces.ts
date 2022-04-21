@@ -2,8 +2,7 @@ import { Role } from '../roles/roles';
 
 export interface IAuthorization {    
     isAuthenticated: boolean,
-    user: IUser,
-    theme: string | null
+    user: IUser
 }
 
 export interface IUser {
@@ -12,7 +11,11 @@ export interface IUser {
     token: string | null | undefined;
     loginRoles: Role[] | null;    
 }
+export interface IAppControl{
+    theme: string | null
+}
 
 export interface IRootState {
-    authorization: IAuthorization
+    authorization: IAuthorization,
+
 }
