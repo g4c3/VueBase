@@ -23,7 +23,7 @@ export default defineComponent({
         logout() {
             this.$store.dispatch('authorization/logout');
             this.$keycloak.logout({
-                redirectUri:  `${window.location.origin}home`
+                redirectUri:  `${window.location.origin}/`
             });
         },
         login() {

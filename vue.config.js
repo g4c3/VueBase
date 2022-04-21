@@ -9,6 +9,7 @@ module.exports = defineConfig({
     entry: "./src/main.ts",
     experiments: {
       outputModule: true,
+      topLevelAwait: true
     },
     optimization: {
       splitChunks: false,
@@ -17,7 +18,7 @@ module.exports = defineConfig({
       library: {
         type: "module",
       },
-    },
+    }
   },
 
   pluginOptions: {

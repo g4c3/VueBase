@@ -1,7 +1,5 @@
-import { createApp } from 'vue'
-import App from './App.vue'
-import vuetify from './plugins/vuetify'
-import { loadFonts } from './plugins/webfontloader'
+import { createApp } from 'vue';
+import App from './App.vue';
 import './registerServiceWorker';
 import createVueRouter from './plugins/router/index';
 import _ from './modules/lodash/lodashLoader';
@@ -15,10 +13,18 @@ import Keycloak, { KeycloakInstance } from "keycloak-js";
 import { keycloakOptions } from './configs/keycloak';
 import { IUser } from './interfaces/intefaces';
 import { Role } from './roles/roles';
+import vuetify, { loadFontAwesome } from './plugins/vuetify/vuetify';
+import { loadFonts } from './plugins/vuetify/webfontloader';
 
 const keycloak = Keycloak(keycloakOptions);
 const app = createApp(App);
-loadFonts()
+
+(async () => {
+    const fontAwesomeLoader = await loadFonts();
+    return fontAwesomeLoader;
+})()
+
+loadFontAwesome(app);
 
 keycloak.init({
     enableLogging: true,
@@ -39,10 +45,13 @@ keycloak.init({
         app.use(vuetify)
         app.mount('#app')
 
-        tokenInterceptor()
+        // tokenInterceptor()
         if(keycloak.token)
-        {     
-            await setUserData();
+        {            
+            (async () => {
+                const userData = await setUserData();
+                return userData;
+            })()
         }
     if(auth) {
         updateToken()
@@ -84,13 +93,15 @@ function updateToken() {
     }, 3600000)
 }
 
-function tokenInterceptor() {
-    axios.interceptors.request.use(config => {
-      if (app.config.globalProperties.$keycloak.authenticated) {
-        config.headers!.Authorization = `Bearer ${app.config.globalProperties.$keycloak.token}`;
-      }
-      return config;
-    }, error => {
-      return Promise.reject(error);
-    })
-}
+
+//TODO: Interceptors
+// function tokenInterceptor() {
+//     axios.interceptors.request.use(config => {
+//       if (app.config.globalProperties.$keycloak.authenticated) {
+//         config.headers!.Authorization = `Bearer ${app.config.globalProperties.$keycloak.token}`;
+//       }
+//       return config;
+//     }, error => {
+//       return Promise.reject(error);
+//     })
+// }
