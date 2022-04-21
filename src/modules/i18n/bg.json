@@ -3,5 +3,8 @@
     "welcome": "zdrasti",
     "logoutBtn": "Login",
     "loginBtn": "Loaut",
-    "toggleTheme": "Toggle theme"
+    "toggleTheme": "Toggle theme",
+    "gifts": "Gifts",
+    "home": "Home",
+    "about": "About"
 }

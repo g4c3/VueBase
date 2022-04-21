@@ -3,8 +3,8 @@
     <v-main>
       <AppHeader/>
       <nav>
-        <router-link to="/">Home</router-link> |
-        <router-link to="/about">About</router-link>
+        <router-link to="/">{{$t("home")}}</router-link> |
+        <router-link to="/about">{{$t("about")}}</router-link>
       </nav>
       <router-view/>
     </v-main>

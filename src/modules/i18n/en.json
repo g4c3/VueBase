@@ -3,5 +3,8 @@
     "welcome": "Welcome",
     "logoutBtn": "Logout",
     "loginBtn": "Login",
-    "toggleTheme": "Toggle theme"
+    "toggleTheme": "Toggle theme",
+    "gifts": "Gifts",
+    "home": "Home",
+    "about": "About"
 }

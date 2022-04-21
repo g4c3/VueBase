@@ -1,12 +1,12 @@
 <template>
     <header class="header">
         <div class="header-1">  
-            <h2>Gifts</h2>          
-            <v-icon icon="$giftIcon"/>
+            <h2>{{$t("gifts")}}</h2>          
+            <v-icon icon="$giftIcon" />
         </div>
         <v-btn class="header-2"  
             @click="toggleTheme">
-            {{ $t("toggleTheme") }}
+            {{$t("toggleTheme")}}
             <v-icon icon="$theme" />
         </v-btn>
         <v-btn v-if="isAuthenticated" 

@@ -1,6 +1,5 @@
 <template>
   <div class="home">
-    <!-- <img v-svg-inline class="icon" src="../assets/logo-vue.svg" alt="example svg image" /> -->
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <WellcomeView msg="And from welcome page"/>
   </div>
@@ -27,8 +26,8 @@ export default defineComponent({
 </script>
 
 <style scoped lang="scss">
-    .icon{
-      height: 20%;
-      width: 20%;
-    }
+  .icon{
+    height: 20%;
+    width: 20%;
+  }
 </style>
