@@ -4,13 +4,14 @@
       <v-col cols="12">
         <v-row>
           <v-img
-            :src="require('../assets/logo.svg')"
+            :src="getVuetifyLogo"
             class="my-3"
             contain
             height="50"
+
           />
           <v-img
-            :src="require('../assets/logo-vue.svg')"
+            :src="getVueLogo"
             class="my-3"
             contain
             height="50"
@@ -101,8 +102,9 @@
 </template>
 
 <script lang='ts'>
-import { defineComponent } from 'vue'
-
+import { defineComponent } from 'vue';
+import vueLogo from '../assets/logos/vue-logo.svg';
+import vuetifyLogo from '../assets/logos/vuetify-logo.svg';
 
 export default defineComponent({
   name: 'HelloWorld',
@@ -157,5 +159,13 @@ export default defineComponent({
       ],
     }
   },
+  computed: {
+    getVueLogo() {
+      return vueLogo
+    },
+    getVuetifyLogo() {
+      return vuetifyLogo
+    }
+  }
 })
 </script>

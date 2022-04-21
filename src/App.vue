@@ -7,20 +7,18 @@
         <router-link to="/about">About</router-link>
       </nav>
       <router-view/>
-      <!-- <HelloWorld/> -->
     </v-main>
   </v-app>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-// import HelloWorld from './components/HelloWorld.vue'
 import AppHeader from '@/components/AppHeader.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    AppHeader       // HelloWorld, 
+    AppHeader
   },
   data () {
     return {}
