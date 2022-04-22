@@ -2,12 +2,6 @@
   <v-app id="app" :theme="getTheme">
     <v-main>
       <AppHeader/>
-      <tabs
-        :tabs="tabs"
-        :currentTab="currentTab"
-        @onClick="handleClick"
-      >        
-      </tabs>
       <router-view/>
     </v-main>
   </v-app>
@@ -16,33 +10,16 @@
 <script lang="ts">
 import { defineComponent } from 'vue'
 import AppHeader from '@/components/AppHeader.vue';
-import Tabs from '@/components/elements/TabsWithActiveLine.vue';
 
 export default defineComponent({
   name: 'App',
   components: {
-    AppHeader, Tabs
+    AppHeader
   },
   data() {
-    return {
-      tabs: [
-        { 
-          title: this.$t("home"),
-          value: '/'
-        },
-        { 
-          title: this.$t("about"),
-          value: 'about'
-        }
-      ],
-      currentTab: 'about',
-    }
+    return {}
   },
-  methods: {
-    handleClick(newTab) {
-      this.currentTab = newTab;
-    },
-  },
+  methods: {},
   computed: {
     getTheme() {
       const theme = this.$store.getters['appManagement/getUserTheme']

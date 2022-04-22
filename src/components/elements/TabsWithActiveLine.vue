@@ -1,6 +1,6 @@
 <template>
     <nav>
-        <button
+        <v-btn
             class="tabs__item"
             type="button"
             v-for="tab in tabs"
@@ -15,7 +15,7 @@
             @click="handleClick(tab.value)"
             v-html="tab.title"
         >
-        </button>
+        </v-btn>
 
         <div
             class="tabs__active-line"
@@ -88,29 +88,11 @@ debugger;
   position: relative;
   margin: 0 auto;
   &__item {
-    display: inline-block;
     margin: 0 5px;
     padding: 10px;
     padding-bottom: 8px;
     font-size: 16px;
-    letter-spacing: 0.8px;
-    color: gray;
-    text-decoration: none;
-    border: none;
-    background-color: transparent;
-    border-bottom: 2px solid transparent;
-    cursor: pointer;
-    transition: all 0.25s;
     &_active {
-      color: black;
-    }
-    &:hover {
-      border-bottom: 2px solid gray;
-      color: black;
-    }
-    &:focus {
-      outline: none;
-      border-bottom: 2px solid gray;
       color: black;
     }
     &:first-child {

@@ -23,6 +23,11 @@
             {{$t("loginBtn")}} 
             <v-icon icon="mdi-login" />
         </v-btn>
+        <tabs class="header-4"
+            :tabs="tabs"
+            :currentTab="currentTab"
+            @onClick="handleClick"
+        />
 </header>
 </template>
 
@@ -30,11 +35,25 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { mapGetters } from 'vuex';
+import Tabs from '@/components/elements/TabsWithActiveLine.vue';
 
 export default defineComponent({
-    name: 'AppHeader',  
+    name: 'AppHeader',
+    components: {
+        Tabs
+    },
     data() {
-        return {}
+        return {
+        tabs: [{ 
+            title: this.$t("home"),
+            value: '/'
+        },
+        { 
+            title: this.$t("about"),
+            value: 'about'
+        }],
+        currentTab: 'home',
+        }
     },
     methods:{
         logout() {
@@ -49,6 +68,9 @@ export default defineComponent({
         toggleTheme() {
             this.$store.commit('appManagement/TOGGLE_THEME')
         },
+        handleClick(newTab) {
+            this.currentTab = newTab;
+        },
     },
     computed: {
         isLoggedIn(): boolean {
@@ -62,7 +84,7 @@ export default defineComponent({
 
 <style lang="scss" scoped>
     .header {
-        background-color: #e0ae0a;
+        background-color: transparentize(#e0ae0a, $amount: .2);
         top: 0;
         position: sticky;
         color: black;
@@ -90,6 +112,11 @@ export default defineComponent({
         &-3 {
             grid-column: 4;
             grid-row: 1;            
+            justify-self: center;
+        }
+        &-4 {
+            grid-row: 4;
+            grid-column: 1 / -1;          
             justify-self: center;
         }
     }

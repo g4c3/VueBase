@@ -20,7 +20,6 @@ export default defineComponent({
     return {}
   },
   methods: {},
-  computed: {
-  },
+  computed: {},
 });
 </script>
