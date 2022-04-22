@@ -81,7 +81,6 @@ export default defineComponent({
 })
 </script>
 
-
 <style lang="scss" scoped>
     .header {
         background-color: transparentize(#e0ae0a, $amount: .2);
