@@ -22,18 +22,6 @@ import { defineComponent } from 'vue'
 import AppHeader from '@/components/AppHeader.vue';
 import Tabs from '@/components/elements/TabsWithActiveLine.vue';
 
-
-const TABS = [{
-  title: 'Tab 1',
-  value: 'tab1',
-}, {
-  title: 'Tab 2',
-  value: 'tab2',
-}, {
-  title: 'Tab 3',
-  value: 'tab3',
-}];
-
 export default defineComponent({
   name: 'App',
   components: {
@@ -41,14 +29,17 @@ export default defineComponent({
   },
   data() {
     return {
-      tabs: TABS,
-      // tabs: [
-      //   { 
-      //     title: this.$t("about"),
-      //     value: 'tab1'
-      //   },
-      // ],
-      currentTab: 'tab1',
+      tabs: [
+        { 
+          title: this.$t("about"),
+          value: 'about'
+        },
+        { 
+          title: this.$t("home"),
+          value: '/'
+        }
+      ],
+      currentTab: 'about',
     }
   },
   methods: {
