@@ -8,17 +8,17 @@
             :key="tab.title"
             :class="[
                 { 'tabs__item_active' : tab.value === currentTab },
-                tab.value === currentTab && tabActiveClass ? tabActiveClass: '',
-                tabClass,
+                tab.value === currentTab && 'tabs__item_active' ? 'tabs__item_active': '',
+                'tabs__item',
             ]"
             :disabled="tab.disabled || false"
             @click="handleClick(tab.value)"
             v-html="tab.title"
-        />
+        >
+        </button>
 
         <div
             class="tabs__active-line"
-            :class="lineClass"
             :style="{ width: `${activeLineWidth}px`, transform: `translateX(${activeLineOffset}px)` }"
         />
     </nav>
@@ -31,33 +31,18 @@ export default defineComponent({
     name: 'tabs-with-active-line',
     props: {
         currentTab: {
-        type: String,
-        required: true,
+            type: String,
+            required: true,
         },
         tabs: {
-        type: Array,
-        required: true,
+            type: Array,
+            required: true,
         },
         updated: {
-        type: [Boolean, String, Array],
-        default: undefined,
+            type: [Boolean, String, Array],
+            default: undefined,
         },
-        wrapperClass: {
-        type: String,
-        required: false,
-        },
-        tabClass: {
-        type: String,
-        required: false,
-        },
-        tabActiveClass: {
-        type: String,
-        required: false,
-        },
-        lineClass: {
-        type: String,
-        required: false,
-        },
+
     },
   watch: {
     currentTab(newCurrentTab) {
@@ -79,6 +64,7 @@ export default defineComponent({
       this.$emit('onClick', value);
       this.moveActiveLine(value);
       this.newTab = value;
+      this.$router.push(``)
     },
     moveActiveLine(newValue) {
         if (!this.currentTab) return;
