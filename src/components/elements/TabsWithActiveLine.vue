@@ -41,8 +41,7 @@ export default defineComponent({
         updated: {
             type: [Boolean, String, Array],
             default: undefined,
-        },
-
+        }
     },
   watch: {
     currentTab(newCurrentTab) {
@@ -64,7 +63,7 @@ export default defineComponent({
       this.$emit('onClick', value);
       this.moveActiveLine(value);
       this.newTab = value;
-      this.$router.push(``)
+      this.$router.push(value);
     },
     moveActiveLine(newValue) {
         if (!this.currentTab) return;

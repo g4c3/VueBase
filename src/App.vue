@@ -8,10 +8,6 @@
         @onClick="handleClick"
       >        
       </tabs>
-      <nav>
-        <router-link to="/">{{$t("home")}}</router-link> |
-        <router-link to="/about">{{$t("about")}}</router-link>
-      </nav>
       <router-view/>
     </v-main>
   </v-app>
@@ -31,12 +27,12 @@ export default defineComponent({
     return {
       tabs: [
         { 
-          title: this.$t("about"),
-          value: 'about'
-        },
-        { 
           title: this.$t("home"),
           value: '/'
+        },
+        { 
+          title: this.$t("about"),
+          value: 'about'
         }
       ],
       currentTab: 'about',
