@@ -16,7 +16,6 @@ import { Role } from './roles/roles';
 import vuetify, { loadFontAwesome } from './plugins/vuetify/vuetify';
 import { loadFonts } from './plugins/vuetify/webfontloader';
 
-
 const keycloak = Keycloak(keycloakConfigs);
 const app = createApp(App);
 
@@ -44,7 +43,8 @@ keycloak.init(keycloakInitOptions).then(
     if(auth) {
         if(keycloak.token)
         {   
-            updateToken();         
+            updateToken();
+            tokenInterceptor();     
             (async () => {
                 const userData = await setUserData();
                 return userData;
@@ -92,19 +92,19 @@ function updateToken() {
         });
     }, 3600000)
 }
+
 async function getStoredUserState() {
     const userData = await app.config.globalProperties.$store.getters['authorization/getUser'];
     return userData;
 }
 
-//TODO: Interceptors
-// function tokenInterceptor() {
-//     axios.interceptors.request.use(config => {
-//       if (app.config.globalProperties.$keycloak.authenticated) {
-//         config.headers!.Authorization = `Bearer ${app.config.globalProperties.$keycloak.token}`;
-//       }
-//       return config;
-//     }, error => {
-//       return Promise.reject(error);
-//     })
-// }
+function tokenInterceptor() {
+    axios.interceptors.request.use(config => {
+      if (app.config.globalProperties.$keycloak.authenticated) {
+        config.headers!.Authorization = `Bearer ${app.config.globalProperties.$keycloak.token}`;
+      }
+      return config;
+    }, error => {
+      return Promise.reject(error);
+    })
+}
