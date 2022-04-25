@@ -9,7 +9,7 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueSvgInlinePlugin from "vue-svg-inline-plugin";
 import luxonLoader from './modules/luxon/luxonLoader';
-import Keycloak, { KeycloakInstance } from "keycloak-js";
+import Keycloak, { KeycloakInstance, KeycloakProfile } from "keycloak-js";
 import { keycloakOptions } from './configs/keycloak';
 import { IUser } from './interfaces/intefaces';
 import { Role } from './roles/roles';
@@ -56,6 +56,11 @@ keycloak.init({
         }
     if(auth) {
         updateToken()
+    } else if(!auth) {
+        const user = await getStoredUserState();
+        if(user != null || user != undefined){
+            app.config.globalProperties.$store.dispatch('authorization/logout')
+        }       
     }
 }).catch((e) => {
     console.log('Authenticated Failed', e);
@@ -93,7 +98,10 @@ function updateToken() {
         });
     }, 3600000)
 }
-
+async function getStoredUserState() {
+    const userData = await app.config.globalProperties.$store.getters['authorization/getUser'];
+    return userData;
+}
 
 //TODO: Interceptors
 // function tokenInterceptor() {

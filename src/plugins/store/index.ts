@@ -29,12 +29,12 @@ export const authorization: Module<IAuthorization, IRootState> = {
     },
     getUserName(state) {
       return state.user.name;
+    },
+    getUser(state) {
+      return state.user;
     }
   },
   mutations: {
-    OVERWRITE_STATE(state, payload: IAuthorization) {
-      state = payload
-    },
     INITIATE_LOGIN(state, payload: IUser) {
       state.isAuthenticated = true,
       state.user.name = payload.name,

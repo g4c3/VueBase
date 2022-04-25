@@ -25,8 +25,21 @@ export default defineComponent({
     name: 'AppFooter',
     data() {
         return {
-            internaLinks: [{}],
-            lengthsocialLinks: [{}]
+            internaLinks: [{
+                    title: 'Impressum',
+                    name:'Impressum',
+                }],
+            socialLinks: [
+                {
+                    name: 'linkedin',
+                    url: 'https://www.linkedin.com/'
+                },
+                {
+                    name: 'xing',
+                    url: 'https://www.xing.com/'
+
+                },
+            ]
         }
     }
 })
@@ -36,6 +49,8 @@ export default defineComponent({
 .footer {
     color: #d2d8d8;
     background-color: #00469B;
+    bottom: 0;
+    position: sticky;
     a:focus {
         outline-color: #fff;
     }

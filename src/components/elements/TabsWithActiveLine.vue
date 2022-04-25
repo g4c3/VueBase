@@ -80,7 +80,6 @@ export default defineComponent({
     this.newTab = this.currentTab;
   },
 })
-debugger;
 </script>
 
 <style lang="scss">

@@ -28,7 +28,7 @@
             :currentTab="currentTab"
             @onClick="handleClick"
         />
-</header>
+    </header>
 </template>
 
 
