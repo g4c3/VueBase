@@ -9,15 +9,15 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueSvgInlinePlugin from "vue-svg-inline-plugin";
 import luxonLoader from './modules/luxon/luxonLoader';
-import Keycloak, { KeycloakInstance, KeycloakProfile } from "keycloak-js";
-import { keycloakOptions } from './configs/keycloak';
+import Keycloak, { KeycloakInstance } from "keycloak-js";
+import { keycloakConfigs, keycloakInitOptions } from './configs/keycloak';
 import { IUser } from './interfaces/intefaces';
 import { Role } from './roles/roles';
 import vuetify, { loadFontAwesome } from './plugins/vuetify/vuetify';
 import { loadFonts } from './plugins/vuetify/webfontloader';
 
 
-const keycloak = Keycloak(keycloakOptions);
+const keycloak = Keycloak(keycloakConfigs);
 const app = createApp(App);
 
 (async () => {
@@ -27,11 +27,7 @@ const app = createApp(App);
 
 loadFontAwesome(app);
 
-keycloak.init({
-    enableLogging: true,
-    checkLoginIframe: true,
-    onLoad: 'check-sso'
-}).then(
+keycloak.init(keycloakInitOptions).then(
     async (auth) => {
         
         app.config.globalProperties.$keycloak = keycloak;
@@ -44,18 +40,16 @@ keycloak.init({
         app.use(VueSvgInlinePlugin)
         app.use(luxonLoader)
         app.use(vuetify)
-        app.mount('#app')
-
-        // tokenInterceptor()
+        app.mount('#app')     
+    if(auth) {
         if(keycloak.token)
-        {            
+        {   
+            updateToken();         
             (async () => {
                 const userData = await setUserData();
                 return userData;
             })()
         }
-    if(auth) {
-        updateToken()
     } else if(!auth) {
         const user = await getStoredUserState();
         if(user != null || user != undefined){

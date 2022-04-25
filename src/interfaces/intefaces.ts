@@ -1,4 +1,5 @@
 import { Role } from '../roles/roles';
+import { KeycloakConfig } from 'keycloak-js'
 
 export interface IAuthorization {    
     isAuthenticated: boolean,
@@ -18,4 +19,9 @@ export interface IAppControl{
 export interface IRootState {
     authorization: IAuthorization,
 
+}
+
+export interface KeycloakProjectConfigs extends KeycloakConfig {
+    'public-client': boolean,
+    'verify-token-audience': boolean
 }

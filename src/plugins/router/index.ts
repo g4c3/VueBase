@@ -48,7 +48,15 @@ const createRoutes = (app: App, store) => {
       },
       component: () => import('@/components/WellcomeView.vue'),
       ...preventRoutes
-    }
+    },
+    {
+      path: '/impressum',
+      name: 'Impressum',
+      component: () => import('@/views/ImpressumView.vue'),
+      meta: {
+          requiresAuth: false,
+      }
+  },
   ] as Array<RouteRecordRaw>;
 }
 

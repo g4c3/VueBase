@@ -25,7 +25,7 @@ export default defineComponent({
     name: 'AppFooter',
     data() {
         return {
-            internaLinks: [{
+            internalLinks: [{
                     title: 'Impressum',
                     name:'Impressum',
                 }],

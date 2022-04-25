@@ -1,4 +1,7 @@
-export const keycloakOptions = {
+import { KeycloakInitOptions } from 'keycloak-js';
+import { KeycloakProjectConfigs } from '@/interfaces/intefaces';
+
+export const keycloakConfigs: KeycloakProjectConfigs = {
     url: 'http://localhost:8080/auth/',
     realm: 'Gifts',
     clientId: 'mirenaET',
@@ -6,8 +9,9 @@ export const keycloakOptions = {
     'verify-token-audience': false
 }
 
-export const keycloakInitOptions = {    
+export const keycloakInitOptions: KeycloakInitOptions = {    
     enableLogging: true,
     checkLoginIframe: true,
     onLoad: 'check-sso'
 }
+
