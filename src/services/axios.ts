@@ -1,20 +1,6 @@
 import axios, { AxiosResponse, AxiosError } from 'axios';
 
 const axiosApiInstance = axios.create()
-// axiosApiInstance.interceptors.request.use(
-//     async config => {
-//       const token = getToken()
-//       if(token) {
-//         config.headers = {
-//             Authorization: `Bearer ${token}`,
-//         }
-//       }
-//       return config
-//     },
-//     error => {
-//       Promise.reject(error)
-//     },
-// )
 
 export async function get<T>(url: string, params?: any): Promise<T> {
     try {
@@ -34,7 +20,3 @@ export async function post(url: string, data?: any, params?: any, headers?: any)
         throw error;
     }
 }
-
-// function getToken(): string {
-//     return this.$keycloak.token;
-// }
