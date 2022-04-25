@@ -100,7 +100,11 @@ async function getStoredUserState() {
 
 function tokenInterceptor() {
     axios.interceptors.request.use(config => {
-        config.headers!.Authorization = `Bearer ${app.config.globalProperties.$keycloak.token}`;
+        config.headers = {
+            'Authorization': `Bearer ${app.config.globalProperties.$keycloak.token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
         return config;
     }, error => {
         return Promise.reject(error);
