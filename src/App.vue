@@ -2,7 +2,7 @@
   <v-app id="app" :theme="getTheme">
     <AppHeader/>
     <v-main>      
-      <router-view />      
+      <router-view/>      
     </v-main>
     <AppFooter/>
   </v-app>
@@ -22,12 +22,7 @@ export default defineComponent({
     return {
     }
   },
-  methods: {
-    // updateScroll() {
-    //   this.scrollPosition = window.scrollY
-    //   console.log(this.scrollPosition)
-    // }
-  },
+  methods: {},
   computed: {
     getTheme() {
       const theme = this.$store.getters['appManagement/getUserTheme']
