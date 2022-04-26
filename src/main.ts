@@ -51,8 +51,8 @@ keycloak.init(keycloakInitOptions).then(
             })()
         }
     } else if(!auth) {
-        const user = await getStoredUserState();
-        if(user != null || user != undefined){
+        const user: IUser = await getStoredUserState();
+        if(user.emailAddress != null){
             app.config.globalProperties.$store.dispatch('authorization/logout')
         }       
     }
@@ -89,6 +89,8 @@ function updateToken() {
             }
         }).catch((e) => {
             console.log('Update failed ' + e);
+            console.log('Logging out ...')
+            app.config.globalProperties.$store.dispatch('authorization/logout')
         });
     }, 3600000)
 }

@@ -48,9 +48,10 @@ export default defineComponent({
 <style lang="scss" scoped>
 .footer {
     color: #d2d8d8;
+    // background-color: transparentize(#00469B, $amount: .2);
     background-color: #00469B;
     bottom: 0;
-    position: sticky;
+    // position: sticky;
     height: auto;
     a:focus {
         outline-color: #fff;
