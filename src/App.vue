@@ -1,8 +1,8 @@
 <template>
   <v-app id="app" :theme="getTheme">
     <AppHeader/>
-    <v-main>      
-      <router-view/>      
+    <v-main class="container">      
+      <router-view />      
     </v-main>
     <AppFooter/>
   </v-app>
@@ -19,15 +19,21 @@ export default defineComponent({
     AppHeader, AppFooter
   },
   data() {
-    return {}
+    return {
+    }
   },
-  methods: {},
+  methods: {
+    // updateScroll() {
+    //   this.scrollPosition = window.scrollY
+    //   console.log(this.scrollPosition)
+    // }
+  },
   computed: {
     getTheme() {
       const theme = this.$store.getters['appManagement/getUserTheme']
       return theme;
     }
-  }
+  },
 })
 </script>
 <style lang="scss">
@@ -36,11 +42,19 @@ export default defineComponent({
     margin: 0; 
     display: grid;
     grid-template-rows: 1fr auto;
-
+    
     font-family: Avenir, Helvetica, Arial, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+    
+  }
+  .container {
+    position: absolute;
+    margin-top: 230px;
+    overflow: auto;
+    z-index: 1;
+    bottom: 0;
   }
 </style>

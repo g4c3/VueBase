@@ -63,7 +63,10 @@ const createRoutes = (app: App, store) => {
 export default function router(app, store) {
   const router = createRouter({
     history: createWebHistory(),
-    routes: createRoutes(app, store)
+    routes: createRoutes(app, store),
+    // scrollBehavior(to, from, savedPosition) {
+    //   return { left: 0, top: 160 };
+    // },
   });
   return router;
 }
