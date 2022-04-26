@@ -87,11 +87,12 @@ export default defineComponent({
 <style lang="scss" scoped>
     .header {
         top: 0;
-        position: fixed;
+        position: sticky;
         width: 100%;
         height: auto;
-            overflow: hidden;
-            z-index: 2;
+        z-index: 2;
+        background: linear-gradient(white, white);
+
         &-container {
             background-color: transparentize(#e0ae0a, $amount: .2);
             width: inherit;
@@ -106,8 +107,6 @@ export default defineComponent({
             padding-bottom: 10px;
             padding-top: 10px;
             grid-row: start;
-
-
 
             &-1 {
                 grid-column:  1;
@@ -125,8 +124,8 @@ export default defineComponent({
                 justify-self: center;
             }
             &-4 {
-                grid-row: 4;
-                grid-column: 1 / -1;          
+                grid-column: 1 / -1;
+                grid-row: 3;          
                 justify-self: center;
             }
         }

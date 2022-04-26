@@ -1,7 +1,7 @@
 <template>
   <v-app id="app" :theme="getTheme">
     <AppHeader/>
-    <v-main class="container">      
+    <v-main>      
       <router-view />      
     </v-main>
     <AppFooter/>
@@ -49,12 +49,5 @@ export default defineComponent({
     text-align: center;
     color: #2c3e50;
     
-  }
-  .container {
-    position: absolute;
-    margin-top: 230px;
-    overflow: auto;
-    z-index: 1;
-    bottom: 0;
   }
 </style>

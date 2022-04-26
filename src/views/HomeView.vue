@@ -23,5 +23,5 @@ export default defineComponent({
   computed: {},
 });
 </script>
-<style lang="scss" scoped>    
+<style lang="scss" scoped>
 </style>
