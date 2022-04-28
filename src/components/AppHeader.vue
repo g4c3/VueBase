@@ -24,9 +24,7 @@
                 {{$t("loginBtn")}} 
                 <v-icon icon="mdi-login" />
             </v-btn>
-            <tabs class="header-container-4"
-                :tabs="tabs"
-            />
+            <tabs class="header-container-4" :tabs="tabs" />
         </div>
         
     </header>

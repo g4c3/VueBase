@@ -10,7 +10,7 @@ export const keycloakConfigs: KeycloakProjectConfigs = {
 }
 
 export const keycloakInitOptions: KeycloakInitOptions = {    
-    enableLogging: true,
+    enableLogging: false,
     checkLoginIframe: true,
     onLoad: 'check-sso'
 }
