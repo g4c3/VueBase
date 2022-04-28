@@ -33,8 +33,9 @@ export default defineComponent({
 </script>
 <style lang="scss">
   #app {
-    min-height: 100vh; 
-    margin: 0; 
+    min-height: 100vh;
+    //max-width: 100%;
+    margin: 0;
     display: grid;
     grid-template-rows: 1fr auto;
     
@@ -42,6 +43,6 @@ export default defineComponent({
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
-    color: #2c3e50;    
+    color: #2c3e50;
   }
 </style>

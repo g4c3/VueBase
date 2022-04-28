@@ -42,16 +42,7 @@ export default defineComponent({
     }
   },
   computed: {},
-  watch: {
-    // currentTab(newCurrentTab) {
-    //   if (this.currentTab === newCurrentTab) return;
-    //   this.moveActiveLine(newCurrentTab);
-    //   this.currentTab = newCurrentTab;
-    // },
-    // updated(){
-    //   this.moveActiveLine(this.currentTab);
-    // },
-  },
+  watch: {},
   methods: {
     handleClick(value: string) {
       if(this.currentTab === value) return;
