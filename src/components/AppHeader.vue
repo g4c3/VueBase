@@ -26,8 +26,6 @@
             </v-btn>
             <tabs class="header-container-4"
                 :tabs="tabs"
-                :initialTab="initialTab"
-                @onClick="handleClick"                
             />
         </div>
         
@@ -47,17 +45,16 @@ export default defineComponent({
     },
     data() {
         return {
-        tabs: [{ 
-            title: this.$t("home"),
-            value: '/'
-        },
-        { 
-            title: this.$t("about"),
-            value: 'about'
-        },
-        ],
-
-        initialTab: '/',
+            tabs: [
+                { 
+                    title: this.$t("home"),
+                    value: '/'
+                },
+                { 
+                    title: this.$t("about"),
+                    value: '/about'
+                },
+            ]
         }
     },
     methods:{
@@ -72,11 +69,7 @@ export default defineComponent({
         },
         toggleTheme() {
             this.$store.commit('appManagement/TOGGLE_THEME')
-        },
-        handleClick(newTab: string) {
-            // console.log(newTab)
-            this.initialTab = newTab;
-        },
+        }
     },
     computed: {
         isLoggedIn(): boolean {

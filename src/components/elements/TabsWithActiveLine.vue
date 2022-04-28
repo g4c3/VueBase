@@ -6,8 +6,8 @@
         class="tabs__item"
         type="button"
         :class="[
-            { 'tabs__item_active' : tab.value === initialTab },
-            tab.value === initialTab && 'tabs__item_active' ? 'tabs__item_active': '',
+            { 'tabs__item_active' : tab.value === currentTab },
+            tab.value === currentTab && 'tabs__item_active' ? 'tabs__item_active': '',
             'tabs__item',
         ]"
         :disabled="tab.disabled || false"
@@ -19,21 +19,20 @@
           class="tabs__active-line"
           :style="{ width: `${activeLineWidth}px`, transform: `translateX(${activeLineOffset}px)` }"
       />
-      <!-- {{getRoute}} -->
     </nav>
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
-import {useRoute} from 'vue-router'
+import { defineComponent } from 'vue';
+import { useRouter} from 'vue-router'
+
 
 export default defineComponent({
   name: 'tabs-with-active-line',
   data: () => ({
     activeLineWidth: 0,
     activeLineOffset: 0,
-    currentTab: '',
-    // initialTab: '/'
+    currentTab: ''
   }),
   props: {
     tabs: {
@@ -43,23 +42,9 @@ export default defineComponent({
     updated: {
       type: [Boolean, String, Array],
       default: undefined,
-    },
-    initialTab: {
-      type: String,
-      required: true,
     }
   },
-  computed: {
-    getRoute(): string  {
-      const route = useRoute();
-      const name = route.name?.toString();
-      if(name === undefined) {        
-        return '';
-      } else {
-        return name;
-      }
-    }
-  },
+  computed: {},
   watch: {
     // currentTab(newCurrentTab) {
     //   if (this.currentTab === newCurrentTab) return;
@@ -83,30 +68,13 @@ export default defineComponent({
       this.activeLineOffset = element[0].offsetLeft;
     },
   },
-  mounted() {
-    const y = this.getRoute;
-    this.moveActiveLine(this.initialTab);
-
-
-
-
-    // const route=useRouter();
-    // const path = route.currentRoute.value.name?.toString();
-    
-    // // const y = route.name;
-    // const r = this.getRoute.value;
-    // const route=this.getRoute;
-    // this.moveActiveLine(route);
-    // // console.log(path)
-    // this.currentTab = route;
-  },
-  // setup () {
-  //   const currentRoute = computed(() => {
-  //     const router = useRoute()
-  //     return router.name;
-  //   })
-  //   return {currentRoute}
-  // }
+  async mounted() {    
+    const router = useRouter();
+    await router.isReady();
+    const route = router.currentRoute.value.path as string;
+    this.moveActiveLine(route);
+    this.currentTab = route;
+  }  
 })
 </script>
 
