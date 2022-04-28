@@ -1,13 +1,13 @@
 <template>
   <div class="home">
-    <vue-horizontal class="horizontal" responsive>
+    <!-- <vue-horizontal class="horizontal" responsive>
       <section v-for="item in items" :key="item.title">
         <div class="item">
           <h3>{{ item.title }}</h3>
           <p>{{ item.content }}</p>
         </div>
       </section>
-    </vue-horizontal>
+    </vue-horizontal> -->
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <WellcomeView msg="And from welcome page"/>
   </div>
@@ -17,12 +17,13 @@
 import { defineComponent } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import WellcomeView from '../components/WellcomeView.vue';
-import VueHorizontal from "vue-horizontal";
+//import VueHorizontal from "vue-horizontal";
 
 export default defineComponent({
   name: 'HomeView',
   components: {
-    HelloWorld, WellcomeView, VueHorizontal
+    HelloWorld, WellcomeView, 
+    //VueHorizontal
 
   },
   data() {

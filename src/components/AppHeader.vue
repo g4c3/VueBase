@@ -26,8 +26,8 @@
             </v-btn>
             <tabs class="header-container-4"
                 :tabs="tabs"
-                :currentTab="currentTab"
-                @onClick="handleClick"
+                :initialTab="initialTab"
+                @onClick="handleClick"                
             />
         </div>
         
@@ -54,8 +54,10 @@ export default defineComponent({
         { 
             title: this.$t("about"),
             value: 'about'
-        }],
-        currentTab: 'home',
+        },
+        ],
+
+        initialTab: '/',
         }
     },
     methods:{
@@ -71,8 +73,9 @@ export default defineComponent({
         toggleTheme() {
             this.$store.commit('appManagement/TOGGLE_THEME')
         },
-        handleClick(newTab) {
-            this.currentTab = newTab;
+        handleClick(newTab: string) {
+            // console.log(newTab)
+            this.initialTab = newTab;
         },
     },
     computed: {
