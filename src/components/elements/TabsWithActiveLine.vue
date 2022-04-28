@@ -1,10 +1,10 @@
 <template>
     <nav>
       <button
-        v-for="tab in tabs" 
-        :key="tab.title" 
         class="tabs__item"
         type="button"
+        v-for="tab in tabs" 
+        :key="tab.title" 
         :class="[
             { 'tabs__item_active' : tab.value === currentTab },
             tab.value === currentTab && 'tabs__item_active' ? 'tabs__item_active': '',
@@ -12,8 +12,9 @@
         ]"
         :disabled="tab.disabled || false"
         @click="handleClick(tab.value)"
-        v-html="tab.title"
-        :ref="tab.value">
+        :ref="tab.value"
+        v-html="tab.title">
+
       </button>
       <div
           class="tabs__active-line"
