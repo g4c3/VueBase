@@ -1,7 +1,7 @@
 <template>
     <nav>
       <button
-        v-for="(tab, index) in tabs" 
+        v-for="tab in tabs" 
         :key="tab.title" 
         class="tabs__item"
         type="button"
@@ -11,7 +11,7 @@
             'tabs__item',
         ]"
         :disabled="tab.disabled || false"
-        @click="handleClick(tab.value, index)"
+        @click="handleClick(tab.value)"
         v-html="tab.title"
         :ref="tab.value">
       </button>
@@ -25,7 +25,6 @@
 <script lang="ts">
 import { defineComponent } from 'vue';
 import { useRouter} from 'vue-router'
-
 
 export default defineComponent({
   name: 'tabs-with-active-line',
@@ -66,6 +65,7 @@ export default defineComponent({
       const element = this.$refs[newValue] as HTMLDivElement[]
       this.activeLineWidth = element[0].offsetWidth;
       this.activeLineOffset = element[0].offsetLeft;
+      this.currentTab = newValue;
     },
   },
   async mounted() {    
@@ -73,7 +73,6 @@ export default defineComponent({
     await router.isReady();
     const route = router.currentRoute.value.path as string;
     this.moveActiveLine(route);
-    this.currentTab = route;
   }  
 })
 </script>
