@@ -34,7 +34,7 @@ export default defineComponent({
 <style lang="scss">
   #app {
     min-height: 100vh;
-    //max-width: 100%;
+    max-width: 100vw;
     margin: 0;
     display: grid;
     grid-template-rows: 1fr auto;
@@ -44,5 +44,22 @@ export default defineComponent({
     -moz-osx-font-smoothing: grayscale;
     text-align: center;
     color: #2c3e50;
+  }
+
+  .page {
+    &-container {
+      position: relative;
+      padding: 40px 20px 100px;
+      max-width: 100vw;
+      margin: 0 auto;
+
+      h2 {
+          margin-top: 1.5rem;
+      }
+
+      // &-inner {
+      //     max-width: $layout-size-inner;
+      // }
+    }
   }
 </style>
