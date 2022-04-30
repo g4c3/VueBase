@@ -21,6 +21,8 @@
 </template>
 
 <script lang="ts">
+//TODO: when bach from main does no change the position of the underline
+
 import { defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 

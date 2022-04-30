@@ -7,6 +7,7 @@
                     <path d="m9.8 12 5 5a1 1 0 1 1-1.4 1.4l-5.7-5.7a1 1 0 0 1 0-1.4l5.7-5.7a1 1 0 0 1 1.4 1.4l-5 5z"/>
                 </svg>
             </slot>
+            <!-- <v-icon icon="mdi-chevron-left" /> -->
         </div>
         
         <div class="preview-container">
@@ -17,6 +18,7 @@
 
         <div class="prev-btn prev-btn-next" v-if="button && hasNext" @click.stop="next" role="button"
             :class="{'prev-btn-between': buttonBetween}">
+            <!-- <v-icon icon="mdi-chevron-right" /> -->
             <slot name="btn-next">
                 <svg class="prev-svg" viewBox="0 0 24 24" aria-label="horizontal scroll area navigate to next button">
                     <path d="m14.3 12.1-5-5a1 1 0 0 1 1.4-1.4l5.7 5.7a1 1 0 0 1 0 1.4l-5.7 5.7a1 1 0 0 1-1.4-1.4l5-5z"/>
@@ -78,20 +80,56 @@ export default defineComponent({
         --count: 1;
         --gap: 16px;
         --margin: 24px;
-        position: relative;
-        overflow: hidden;        
-        max-width: 98vw;        //only temporary to fix the glitch with the buttons
+        position: relative;                
+        // max-width: 90vw;        //only temporary to fix the glitch with the buttons
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        align-items: center;
+        // left: 5%;
 
         &-container {
             display: flex;
-            flex-direction: row;
-            min-width: 95%;
+            
+            // flex-direction: row;
+            // justify-content: flex-start;
+            // min-width: 90%;
             position: relative;
-            left: 2.5%;
-            right: 2.5%;
+            // left: 3%;
+            // right: 3%;
+            max-width: 90vw;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            border: none;
+            box-sizing: content-box;
+            overflow-x: scroll;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            -webkit-overflow-scrolling: touch;
+        }
+        &-container > * {
+            flex-shrink: 0;
+            box-sizing: border-box;
+            /* Prevent content from collapsing when empty. E.g. image while loading height=0. */
+            min-height: 1px;
+        }
+        &-container:not(.preview-scroll) {
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+            /* To effectively hide scrollbar for iOS Safari. 10% of the users. */
+            padding-bottom: 30px;
+            // margin-bottom: -30px;
+            clip-path: inset(0 0 30px 0);
+        }
+        &-container:not(.preview-scroll)::-webkit-scrollbar {
+            /* !important: So that users don't accidentally show scrollbar. */
+            width: 0 !important;
+            height: 0 !important;
         }
     }
-    
+
+
     @media (min-width: 640px) {
         .preview {
             --count: 2;
@@ -101,7 +139,6 @@ export default defineComponent({
         .preview {
             --count: 3;
             --margin: 0;
-
         }
     }
     @media (min-width: 1024px) {
@@ -121,33 +158,34 @@ export default defineComponent({
         .item {
             width: calc((100% - (var(--margin) * 2) + var(--gap)) / var(--count));
             padding: 0 calc(var(--gap) / 2);
-    }
+        }
 
-    .item:first-child {
-        width: calc((100% - (var(--margin) * 2) + var(--gap)) / var(--count) + var(--margin) - (var(--gap) / 2));
-        padding-left: var(--margin);
-    }
+        .item:first-child {
+            width: calc((100% - (var(--margin) * 2) + var(--gap)) / var(--count) + var(--margin) - (var(--gap) / 2));
+            padding-left: var(--margin);
+        }
 
-    .item:last-child {
-        width: calc((100% - (var(--margin) * 2) + var(--gap)) / var(--count) + var(--margin) - (var(--gap) / 2));
-        padding-right: var(--margin);
-    }
+        .item:last-child {
+            width: calc((100% - (var(--margin) * 2) + var(--gap)) / var(--count) + var(--margin) - (var(--gap) / 2));
+            padding-right: var(--margin);
+        }
 
-    .item:only-child {
-        width: calc((100% - (var(--margin) * 2) + var(--gap)) / var(--count) + var(--margin) * 2 - var(--gap));
-    }
+        .item:only-child {
+            width: calc((100% - (var(--margin) * 2) + var(--gap)) / var(--count) + var(--margin) * 2 - var(--gap));
+        }
 
-    .horizontal {
-        margin: 0 calc(var(--margin) * -1);
-    }
+        //TODO: check these
+        .preview {
+            margin: 0 var(--margin);
+        }
 
-    .horizontal >>> .v-hl-container {
-        scroll-padding: 0 calc(var(--margin) - (var(--gap) / 2));
-    }
+        .preview >>> .preview-container {
+            scroll-padding: 0 calc(var(--margin) - (var(--gap) / 2));
+        }
 
-    .horizontal >>> .v-hl-btn {
-        display: none;
-    }
+        .preview >>> .prev-btn {
+            display: none;
+        }
     }
 
     @media (min-width: 768px) {
@@ -162,20 +200,20 @@ export default defineComponent({
         position: absolute;
         align-self: center;
         z-index: 1;
-        top: 0;
+        // top: 0;      //does it do anything
         bottom: 0;
         display: flex;
         align-items: center;
         cursor: pointer;
     }
     .prev-btn-prev {
-        left: 16px;
+        left: 3vw;
     }
     .prev-btn-prev.prev-btn-between {
         transform: translateX(-50%);
     }
     .prev-btn-next {
-        right: 16px;
+        right: 3vw;
     }
     .prev-btn-next.prev-btn-between {
         transform: translateX(50%);
