@@ -218,6 +218,14 @@ export default defineComponent({
     .prev-btn-next.prev-btn-between {
         transform: translateX(50%);
     }
+    @media (max-width: 768px) {
+        .prev-btn-prev {
+            left: 3vw + var(--margin);
+        }
+        .prev-btn-next {
+            right: calc(3vw + var(--margin));
+        }
+    }
 
     .prev-svg {
         width: 40px;
