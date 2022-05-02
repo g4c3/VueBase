@@ -12,7 +12,10 @@
         
         <div class="preview-container">
             <div class="item" v-for="item in items" :key="item.i">
-                {{item.title}}
+                <div class="card">
+                    <h1>{{item.title}}</h1>
+                    <h5>{{item.content}}</h5>
+                </div>
             </div>
         </div>
 
@@ -81,22 +84,14 @@ export default defineComponent({
         --gap: 16px;
         --margin: 24px;
         position: relative;                
-        // max-width: 90vw;        //only temporary to fix the glitch with the buttons
         display: flex;
         flex-direction: row;
         justify-content: center;
         align-items: center;
-        // left: 5%;
 
         &-container {
             display: flex;
-            
-            // flex-direction: row;
-            // justify-content: flex-start;
-            // min-width: 90%;
             position: relative;
-            // left: 3%;
-            // right: 3%;
             max-width: 90vw;
             height: 100%;
             margin: 0;
@@ -111,19 +106,14 @@ export default defineComponent({
         &-container > * {
             flex-shrink: 0;
             box-sizing: border-box;
-            /* Prevent content from collapsing when empty. E.g. image while loading height=0. */
             min-height: 1px;
         }
         &-container:not(.preview-scroll) {
             scrollbar-width: none;
             -ms-overflow-style: none;
-            /* To effectively hide scrollbar for iOS Safari. 10% of the users. */
-            padding-bottom: 30px;
-            // margin-bottom: -30px;
-            clip-path: inset(0 0 30px 0);
+            clip-path: inset(0 0 0 0);
         }
         &-container:not(.preview-scroll)::-webkit-scrollbar {
-            /* !important: So that users don't accidentally show scrollbar. */
             width: 0 !important;
             height: 0 !important;
         }
@@ -200,8 +190,6 @@ export default defineComponent({
         position: absolute;
         align-self: center;
         z-index: 1;
-        // top: 0;      //does it do anything
-        bottom: 0;
         display: flex;
         align-items: center;
         cursor: pointer;
@@ -220,7 +208,7 @@ export default defineComponent({
     }
     @media (max-width: 768px) {
         .prev-btn-prev {
-            left: 3vw + var(--margin);
+            left: calc(3vw + var(--margin));
         }
         .prev-btn-next {
             right: calc(3vw + var(--margin));
