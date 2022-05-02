@@ -1,15 +1,8 @@
 <template>
     <div class="preview">
-        <div class="prev-btn prev-btn-prev" v-if="button && hasPrev" @click.stop="prev" role="button"
-            :class="{'prev-btn-between': buttonBetween}">
-            <slot name="btn-prev">
-                <svg class="prev-svg" viewBox="0 0 24 24" aria-label="horizontal scroll area navigate to previous button">
-                    <path d="m9.8 12 5 5a1 1 0 1 1-1.4 1.4l-5.7-5.7a1 1 0 0 1 0-1.4l5.7-5.7a1 1 0 0 1 1.4 1.4l-5 5z"/>
-                </svg>
-            </slot>
-            <!-- <v-icon icon="mdi-chevron-left" /> -->
-        </div>
-        
+        <v-btn elevation="4" icon >
+            <v-icon icon="mdi-chevron-left" size="32"/>
+        </v-btn>        
         <div class="preview-container">
             <div class="item" v-for="item in items" :key="item.i">
                 <div class="card">
@@ -18,16 +11,9 @@
                 </div>
             </div>
         </div>
-
-        <div class="prev-btn prev-btn-next" v-if="button && hasNext" @click.stop="next" role="button"
-            :class="{'prev-btn-between': buttonBetween}">
-            <!-- <v-icon icon="mdi-chevron-right" /> -->
-            <slot name="btn-next">
-                <svg class="prev-svg" viewBox="0 0 24 24" aria-label="horizontal scroll area navigate to next button">
-                    <path d="m14.3 12.1-5-5a1 1 0 0 1 1.4-1.4l5.7 5.7a1 1 0 0 1 0 1.4l-5.7 5.7a1 1 0 0 1-1.4-1.4l5-5z"/>
-                </svg>
-            </slot>
-        </div>            
+        <v-btn elevation="4" icon >
+            <v-icon icon="mdi-chevron-right" size="32"/>
+        </v-btn>
     </div>  
 </template>
 
@@ -165,9 +151,9 @@ export default defineComponent({
         }
 
         //TODO: check these
-        .preview {
-            margin: 0 var(--margin);
-        }
+        // .preview {
+        //     margin: 0 var(--margin);
+        // }
 
         .preview >>> .preview-container {
             scroll-padding: 0 calc(var(--margin) - (var(--gap) / 2));
@@ -183,48 +169,5 @@ export default defineComponent({
             width: calc((100% - ((var(--count) - 1) * var(--gap))) / var(--count));
             margin-right: var(--gap);
         }
-    }
-
-    //button styles
-    .prev-btn {
-        position: absolute;
-        align-self: center;
-        z-index: 1;
-        display: flex;
-        align-items: center;
-        cursor: pointer;
-    }
-    .prev-btn-prev {
-        left: 3vw;
-    }
-    .prev-btn-prev.prev-btn-between {
-        transform: translateX(-50%);
-    }
-    .prev-btn-next {
-        right: 3vw;
-    }
-    .prev-btn-next.prev-btn-between {
-        transform: translateX(50%);
-    }
-    @media (max-width: 768px) {
-        .prev-btn-prev {
-            left: calc(3vw + var(--margin));
-        }
-        .prev-btn-next {
-            right: calc(3vw + var(--margin));
-        }
-    }
-
-    .prev-svg {
-        width: 40px;
-        height: 40px;
-        margin: 6px;
-        padding: 6px;
-        border-radius: 20px;
-        box-sizing: border-box;
-        background: white;
-        color: black;
-        fill: currentColor;
-        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
     }
 </style>
