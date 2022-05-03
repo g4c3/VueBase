@@ -59,24 +59,25 @@ export default defineComponent({
     methods: {
         prev(): void {
             const container = this.$refs.container as Element
-            const scrollTo = container.scrollLeft - container.clientWidth - 15.16;            
+            const scrollTo = container.scrollLeft - container.clientWidth - 17;            
             container.scrollTo({ left: scrollTo, behavior: "smooth" })
 
             // console.log("clientWidth " + container.clientWidth)
-            // console.log("scrollWidth " + container.scrollWidth / 4)
+            // console.log("scrollWidth " + container.scrollWidth)
             // console.log("children width " + container.children[0].clientWidth)
             // console.log("scrollLeft " + container.scrollLeft)
 
         },
         next(): void {
             const container = this.$refs.container as Element
-            const scrollTo = container.scrollLeft + container.clientWidth + 15.16;
-            container.scrollTo({ left: scrollTo, behavior: "smooth" })            
-            
-            // console.log("clientWidth " + container.clientWidth)
-            // console.log("scrollWidth " + container.scrollWidth / 4)
-            // console.log("children width " + container.children[0].clientWidth)
-            // console.log("scrollLeft " + container.scrollLeft)
+            // console.log("before clientWidth " + container.clientWidth)
+            // console.log("before scrollWidth " + container.scrollWidth)
+            // console.log("before scrollLeft " + container.scrollLeft)
+
+            const scrollTo = container.scrollLeft + container.clientWidth + 17;
+            if((container.scrollLeft + container.clientWidth + 17) <= container.scrollWidth) {                
+                container.scrollTo({ left: scrollTo, behavior: "smooth" })
+            }
         }
     },
 })
