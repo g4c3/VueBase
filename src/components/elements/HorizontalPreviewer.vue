@@ -60,7 +60,7 @@ export default defineComponent({
         prev(): void {
             const container = this.$refs.container as Element
             const scrollTo = container.scrollLeft - container.clientWidth - 15.16;            
-            container.scrollTo({ left: scrollTo })
+            container.scrollTo({ left: scrollTo, behavior: "smooth" })
 
             // console.log("clientWidth " + container.clientWidth)
             // console.log("scrollWidth " + container.scrollWidth / 4)
@@ -71,7 +71,7 @@ export default defineComponent({
         next(): void {
             const container = this.$refs.container as Element
             const scrollTo = container.scrollLeft + container.clientWidth + 15.16;
-            container.scrollTo({ left: scrollTo })            
+            container.scrollTo({ left: scrollTo, behavior: "smooth" })            
             
             // console.log("clientWidth " + container.clientWidth)
             // console.log("scrollWidth " + container.scrollWidth / 4)
