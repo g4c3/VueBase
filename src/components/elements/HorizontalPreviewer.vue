@@ -240,12 +240,12 @@ export default defineComponent({
                 margin-right: var(--gap);
             }     
         }
-       .item:last-child {
-            margin-right: 0;
-            padding-right: 0;
-        }
-        .item:first-child {
-            margin-left: 0;
-            padding-left: 0;
-        }
+    //    .item:last-child {
+    //         margin-right: 0;
+    //         padding-right: 0;
+    //     }
+    //     .item:first-child {
+    //         margin-left: 0;
+    //         padding-left: 0;
+    //     }
 </style>
