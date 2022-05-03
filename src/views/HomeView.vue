@@ -24,7 +24,7 @@ export default defineComponent({
   data() {
     return {
       //mocked
-      items: [...Array(13).keys()].map((i) => {
+      items: [...Array(12).keys()].map((i) => {
         return {i, title: `Responsive`, content: `Content`};
       }),
     }

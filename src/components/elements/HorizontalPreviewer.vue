@@ -1,17 +1,17 @@
 <template>
     <div class="preview">
-        <v-btn elevation="4" icon class="left">
+        <v-btn elevation="4" icon class="left" @click="prev">
             <v-icon icon="mdi-chevron-left"/>
         </v-btn>        
-        <div class="preview-container">
+        <div class="preview-container" ref="container">
             <div class="item" v-for="item in items" :key="item.i">
                 <div class="card">
                     <h1>{{item.title}}</h1>
-                    <h5>{{item.content}}</h5>
+                    <h5>{{item.content}} {{item.i}}</h5>
                 </div>
             </div>
         </div>
-        <v-btn elevation="4" icon class="right">
+        <v-btn elevation="4" icon class="right" @click="next">
             <v-icon icon="mdi-chevron-right"/>
         </v-btn>
     </div>  
@@ -56,12 +56,33 @@ export default defineComponent({
             default: () => true
         },
     },
-    methods: {},
+    methods: {
+        prev(): void {
+            const container = this.$refs.container as Element
+            const scrollTo = container.scrollLeft - container.clientWidth - 15.16;            
+            container.scrollTo({ left: scrollTo })
+
+            // console.log("clientWidth " + container.clientWidth)
+            // console.log("scrollWidth " + container.scrollWidth / 4)
+            // console.log("children width " + container.children[0].clientWidth)
+            // console.log("scrollLeft " + container.scrollLeft)
+
+        },
+        next(): void {
+            const container = this.$refs.container as Element
+            const scrollTo = container.scrollLeft + container.clientWidth + 15.16;
+            container.scrollTo({ left: scrollTo })            
+            
+            // console.log("clientWidth " + container.clientWidth)
+            // console.log("scrollWidth " + container.scrollWidth / 4)
+            // console.log("children width " + container.children[0].clientWidth)
+            // console.log("scrollLeft " + container.scrollLeft)
+        }
+    },
 })
 </script>
 
 <style lang="scss" scoped>
-
     //buttons and icon styles
     .v-icon {
         height: 32px;
@@ -104,7 +125,7 @@ export default defineComponent({
             right: calc(3vw + 17px);
         }
     }
-        @media (max-width: 480px) {
+    @media (max-width: 480px) {
         .v-btn.right {
             right: calc(4vw + 17px);
         }
