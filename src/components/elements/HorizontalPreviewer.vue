@@ -56,10 +56,7 @@ export default defineComponent({
             default: () => true
         },
     },
-    methods: {
-
-    }
-
+    methods: {},
 })
 </script>
 
@@ -104,7 +101,12 @@ export default defineComponent({
     }
     @media (max-width: 640px) {
         .v-btn.right {
-            right: calc(3vw + 12px);
+            right: calc(3vw + 17px);
+        }
+    }
+        @media (max-width: 480px) {
+        .v-btn.right {
+            right: calc(4vw + 17px);
         }
     }
 
