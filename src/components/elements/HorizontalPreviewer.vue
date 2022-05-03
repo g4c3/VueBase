@@ -59,9 +59,9 @@ export default defineComponent({
     methods: {
         prev(): void {
             const container = this.$refs.container as Element
-            const scrollTo = container.scrollLeft - container.clientWidth - 17;            
+            const scrollTo = container.scrollLeft - container.clientWidth - 25;            
             container.scrollTo({ left: scrollTo, behavior: "smooth" })
-
+            
             // console.log("clientWidth " + container.clientWidth)
             // console.log("scrollWidth " + container.scrollWidth)
             // console.log("children width " + container.children[0].clientWidth)
@@ -73,13 +73,15 @@ export default defineComponent({
             // console.log("before clientWidth " + container.clientWidth)
             // console.log("before scrollWidth " + container.scrollWidth)
             // console.log("before scrollLeft " + container.scrollLeft)
-
-            const scrollTo = container.scrollLeft + container.clientWidth + 17;
-            if((container.scrollLeft + container.clientWidth + 17) <= container.scrollWidth) {                
+            // console.log(window.innerWidth - document.body.offsetWidth)  // scrollbar width
+            const scrollTo = container.scrollLeft + container.clientWidth + 25;
+            // console.log(container.scrollWidth - (container.scrollLeft + container.clientWidth + 17))
+            // if((container.scrollLeft + container.clientWidth + 17) <= container.scrollWidth) {                
                 container.scrollTo({ left: scrollTo, behavior: "smooth" })
-            }
+                console.log("before scrollLeft " + container.scrollLeft)
+            // }
         }
-    },
+    }
 })
 </script>
 
@@ -234,8 +236,16 @@ export default defineComponent({
 
     @media (min-width: 768px) {
         .item {
-            width: calc((100% - ((var(--count) - 1) * var(--gap))) / var(--count));
-            margin-right: var(--gap);
+                width: calc((100% - ((var(--count) - 1) * var(--gap))) / var(--count));
+                margin-right: var(--gap);
+            }     
         }
-    }
+       .item:last-child {
+            margin-right: 0;
+            padding-right: 0;
+        }
+        .item:first-child {
+            margin-left: 0;
+            padding-left: 0;
+        }
 </style>
