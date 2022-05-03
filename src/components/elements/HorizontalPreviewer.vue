@@ -1,7 +1,7 @@
 <template>
     <div class="preview">
-        <v-btn elevation="4" icon >
-            <v-icon icon="mdi-chevron-left" size="32"/>
+        <v-btn elevation="4" icon class="left">
+            <v-icon icon="mdi-chevron-left"/>
         </v-btn>        
         <div class="preview-container">
             <div class="item" v-for="item in items" :key="item.i">
@@ -11,8 +11,8 @@
                 </div>
             </div>
         </div>
-        <v-btn elevation="4" icon >
-            <v-icon icon="mdi-chevron-right" size="32"/>
+        <v-btn elevation="4" icon class="right">
+            <v-icon icon="mdi-chevron-right"/>
         </v-btn>
     </div>  
 </template>
@@ -64,6 +64,50 @@ export default defineComponent({
 </script>
 
 <style lang="scss" scoped>
+
+    //buttons and icon styles
+    .v-icon {
+        height: 32px;
+        width: 32px;
+        font-size: 32px;
+    }
+    @media (min-width: 1024px) and (max-width: 1280px) {
+        .v-btn.left {
+            left: 1vw;
+        }
+        .v-btn.right {
+            right: 1vw;
+        }
+    }
+    @media (max-width: 1024px)
+    {
+        .v-btn {
+            height: 32px;
+            width: 32px;
+        }
+        .v-btn.left {
+            left: 2vw;
+        }
+        .v-btn.right {
+            right: 2vw;
+        }
+        .v-icon {
+            height: 24px;
+            width: 24px;
+            font-size: 24px;
+        }
+    }
+    @media (max-width: 768px) {
+        .v-btn.right {
+            right: 3vw;
+        }
+    }
+    @media (max-width: 640px) {
+        .v-btn.right {
+            right: calc(3vw + 12px);
+        }
+    }
+
     //main container style
     .preview {
         --count: 1;
