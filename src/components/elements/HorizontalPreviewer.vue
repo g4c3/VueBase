@@ -1,6 +1,11 @@
 <template>
     <div class="container">
-        <v-btn elevation="4" icon class="container-btn" @click.stop="prev">
+        <v-btn             
+            elevation="4" 
+            icon 
+            class="container-btn container-btn-left"
+            :class="{'inactive': !hasPrev}"
+            @click.stop="prev">
             <v-icon icon="mdi-chevron-left"/>
         </v-btn>        
         <div class="container-preview" ref="preview">
@@ -11,7 +16,12 @@
                 </div>
             </div>
         </div>
-        <v-btn elevation="4" icon class="container-btn" @click.stop="next">
+        <v-btn 
+            elevation="4" 
+            icon 
+            class="container-btn container-btn-right" 
+            :class="{'inactive': !hasNext}"
+            @click.stop="next">
             <v-icon icon="mdi-chevron-right"/>
         </v-btn>
     </div>  
@@ -19,15 +29,11 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { useDisplay } from 'vuetify'
 
 interface VueHorizontalData {
   left: number;
   width: number;
   scrollWidth: number;
-  hasPrev: boolean;
-  hasNext: boolean;
-  debounceId?: number | undefined;
   scrollCompleted: boolean;
 }
 
@@ -38,9 +44,6 @@ export default defineComponent({
             left: 0,
             width: 0,
             scrollWidth: 0,
-            hasPrev: true,
-            hasNext: true,
-            debounceId: undefined,
             scrollCompleted: true
         }
     },
@@ -61,8 +64,18 @@ export default defineComponent({
     methods: {
         prev(): void {
             const container = this.$refs.preview as Element;
-            const scrollTo = container.scrollLeft - container.clientWidth;   
-            container.scrollTo({ left: scrollTo, behavior: "smooth" });
+            const options: ScrollToOptions = { 
+                left: container.scrollLeft - container.clientWidth, 
+                behavior: "smooth"
+            }
+
+            if(this.scrollCompleted) {
+                this.scrollCompleted = false;
+                container.scrollTo(options);            
+                setTimeout(() => {
+                    this.scrollCompleted = true;
+                }, 850);
+            }
         },
         next(): void {
             const container = this.$refs.preview as Element;         
@@ -72,34 +85,21 @@ export default defineComponent({
             }
 
             if(this.scrollCompleted) {
-                this.scrollCompleted = false;
+                this.scrollCompleted = false;   
                 container.scrollTo(options);
+                setTimeout(() => {
+                    this.scrollCompleted = true;
+                }, 850);
             }
-            
-            setTimeout(() => {
-                this.scrollCompleted = true;
-            }, 500);
         }
     },
     computed: {
-        itemsCount() {
-            const { name } = useDisplay()
-
-            const height = () => {
-                // name is reactive and
-                // must use .value
-                switch (name.value) {
-                    case 'xs': return 220
-                    case 'sm': return 400
-                    case 'md': return 500
-                    case 'lg': return 600
-                    case 'xl': return 800
-                    case 'xxl': return 1200
-                    default : return 0
-                }
-            }
-
-            return height;
+        hasPrev(): boolean {
+            //find if there are items on the left
+            return true;
+        },
+        hasNext(): boolean {
+            return true;
         }
     }
 })
@@ -119,11 +119,18 @@ export default defineComponent({
         &-btn {
             position: relative;
             margin: auto;
+            &-left {
+                grid-column:  1;
+            }
+            &-right {
+                grid-column:  3;
+            }
         }
 
         &-preview {
             position: relative;
             display: flex;
+            grid-column:  2;
             box-sizing: content-box;
             overflow-x: scroll;
             overflow-y: hidden;
@@ -175,5 +182,9 @@ export default defineComponent({
 
     .item { 
         width: calc(100%  / var(--count));
+    }
+
+    .inactive {
+        display: none;
     }
 </style>
