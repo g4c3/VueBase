@@ -28,6 +28,7 @@ interface VueHorizontalData {
   hasPrev: boolean;
   hasNext: boolean;
   debounceId?: number | undefined;
+  scrollCompleted: boolean;
 }
 
 export default defineComponent({
@@ -40,6 +41,7 @@ export default defineComponent({
             hasPrev: true,
             hasNext: true,
             debounceId: undefined,
+            scrollCompleted: true
         }
     },
     props: {
@@ -63,9 +65,20 @@ export default defineComponent({
             container.scrollTo({ left: scrollTo, behavior: "smooth" });
         },
         next(): void {
-            const container = this.$refs.preview as Element;
-            const scrollTo = container.scrollLeft + container.clientWidth;             
-            container.scrollTo({ left: scrollTo, behavior: "smooth" });
+            const container = this.$refs.preview as Element;         
+            const options: ScrollToOptions = { 
+                left: container.scrollLeft + container.clientWidth, 
+                behavior: "smooth"
+            }
+
+            if(this.scrollCompleted) {
+                this.scrollCompleted = false;
+                container.scrollTo(options);
+            }
+            
+            setTimeout(() => {
+                this.scrollCompleted = true;
+            }, 500);
         }
     },
     computed: {
