@@ -35,8 +35,10 @@ interface VueHorizontalData {
   width: number;
   scrollWidth: number;
   scrollCompleted: boolean;
+  hasPrev: boolean;
+  hasNext: boolean;
 }
-
+const delta = 2.5
 export default defineComponent({
     name: 'CardPreviewer',
     data(): VueHorizontalData {
@@ -44,7 +46,9 @@ export default defineComponent({
             left: 0,
             width: 0,
             scrollWidth: 0,
-            scrollCompleted: true
+            scrollCompleted: true,
+            hasPrev: false,
+            hasNext: true
         }
     },
     props: {
@@ -74,7 +78,9 @@ export default defineComponent({
                 container.scrollTo(options);            
                 setTimeout(() => {
                     this.scrollCompleted = true;
-                }, 850);
+                this.hasNext = this.checkIfHasNext();
+                this.hasPrev = this.checkIfHasPrev();
+                }, 750);
             }
         },
         next(): void {
@@ -82,27 +88,34 @@ export default defineComponent({
             const options: ScrollToOptions = { 
                 left: container.scrollLeft + container.clientWidth, 
                 behavior: "smooth"
-            }
+            }            
 
             if(this.scrollCompleted) {
                 this.scrollCompleted = false;   
                 container.scrollTo(options);
                 setTimeout(() => {
                     this.scrollCompleted = true;
-                }, 850);
+                this.hasNext = this.checkIfHasNext();
+                this.hasPrev = this.checkIfHasPrev();
+                }, 750);                
+            }
+        },
+        checkIfHasNext(): boolean {
+            const container = this.$refs.preview as Element;
+            const result =  container.scrollWidth >= container.scrollLeft + container.clientWidth + delta;
+            return result;
+        },
+        checkIfHasPrev(): boolean {
+            const container = this.$refs.preview as Element;
+            if (container.scrollLeft === 0) {
+                return false;
+            } else {
+                return true;
             }
         }
     },
-    computed: {
-        hasPrev(): boolean {
-            //find if there are items on the left
-            return true;
-        },
-        hasNext(): boolean {
-            return true;
-        }
-    }
 })
+debugger;
 </script>
 
 <style lang="scss" scoped>
