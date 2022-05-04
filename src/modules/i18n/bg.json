@@ -1,4 +1,10 @@
 {
     "message": "zdrasti i18n !!",
-    "welcome": "zdrasti"
+    "welcome": "zdrasti",
+    "logoutBtn": "Login",
+    "loginBtn": "Loaut",
+    "toggleTheme": "Toggle theme",
+    "gifts": "Gifts",
+    "home": "Home",
+    "about": "About"
 }

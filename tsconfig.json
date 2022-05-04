@@ -14,7 +14,7 @@
     "baseUrl": ".",
     "noImplicitAny": false,
     "types": [
-      "webpack-env"
+      "webpack-env", "vuetify"
     ],
     "paths": {
       "@/*": [
@@ -33,7 +33,8 @@
     "src/**/*.tsx",
     "src/**/*.vue",
     "tests/**/*.ts",
-    "tests/**/*.tsx"
+    "tests/**/*.tsx",
+    "src/shims/svg.d.ts"
   ],
   "exclude": [
     "node_modules"

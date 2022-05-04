@@ -1,48 +1,66 @@
 <template>
-  <div class="home">
-    <img v-svg-inline class="icon" src="../assets/logo-vue.svg" alt="example svg image" />
+  <div class="page">
+    <HorizontalPreviewer :items="items">   
+    </HorizontalPreviewer>
     <HelloWorld msg="Welcome to Your Vue.js + TypeScript App"/>
     <WellcomeView msg="And from welcome page"/>
-    <br>
-    {{time}}
-    <br>
-    {{this.$keycloak.authenticated}} - {{'directly'}}
-    {{this.$store}}
-    <button type="button" @click="logout"> {{$t("logoutBtn")}} </button>
   </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue';
+import { defineComponent, computed } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import WellcomeView from '../components/WellcomeView.vue';
+import HorizontalPreviewer from "@/components/elements/HorizontalPreviewer.vue";
+import { useDisplay } from 'vuetify'
 
 export default defineComponent({
   name: 'HomeView',
   components: {
-    HelloWorld, WellcomeView
+    HelloWorld, 
+    WellcomeView,
+    HorizontalPreviewer
   },
   data() {
-    return {}
+    return {
+      //mocked
+      items: [...Array(12).keys()].map((i) => {
+        return {i, title: `Responsive`, content: `Content`};
+      }),
+    }
   },
-  methods:{
-    logout(){
-      this.$store.dispatch('authorization/logout');
-      this.$keycloak.logout();
-    },
-  },
-  computed: {
-    time(): string{
-      let currentTime = this.$luxon.DateTime.now().toString()
-      return currentTime
-    },
-  },
+  setup () {
+      const { name } = useDisplay()
+
+      const height = computed(() => {
+        // name is reactive and
+        // must use .value
+        switch (name.value) {
+          case 'xs': return 220
+          case 'sm': return 400
+          case 'md': return 500
+          case 'lg': return 600
+          case 'xl': return 800
+          case 'xxl': return 1200
+          default : return 0
+        }
+      });
+
+      const width = computed(() => {
+        switch (name.value) {
+          case 'xs': return 220
+          case 'sm': return 400
+          case 'md': return 500
+          case 'lg': return 600
+          case 'xl': return 800
+          case 'xxl': return 1200
+          default : return 0
+        }
+      })
+
+      return { height, width }
+    }
 });
 </script>
-
-<style scoped lang="scss">
-    .icon{
-      height: 20%;
-      width: 20%;
-    }
+<style scoped>
 </style>

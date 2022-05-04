@@ -1,4 +1,4 @@
-import { createRouter, createWebHistory, Router, RouteRecordRaw } from 'vue-router'
+import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import { App } from 'vue';
 import { KeycloakInstance } from 'keycloak-js';
@@ -48,7 +48,15 @@ const createRoutes = (app: App, store) => {
       },
       component: () => import('@/components/WellcomeView.vue'),
       ...preventRoutes
-    }
+    },
+    {
+      path: '/impressum',
+      name: 'Impressum',
+      component: () => import('@/views/ImpressumView.vue'),
+      meta: {
+          requiresAuth: false,
+      }
+  },
   ] as Array<RouteRecordRaw>;
 }
 
@@ -60,4 +68,3 @@ export default function router(app, store) {
   return router;
 }
 
-//debugger;

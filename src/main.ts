@@ -10,18 +10,23 @@ import VueAxios from 'vue-axios';
 import VueSvgInlinePlugin from "vue-svg-inline-plugin";
 import luxonLoader from './modules/luxon/luxonLoader';
 import Keycloak, { KeycloakInstance } from "keycloak-js";
-import { keycloakOptions } from './configs/keycloak';
+import { keycloakConfigs, keycloakInitOptions } from './configs/keycloak';
 import { IUser } from './interfaces/intefaces';
 import { Role } from './roles/roles';
+import vuetify, { loadFontAwesome } from './plugins/vuetify/vuetify';
+import { loadFonts } from './plugins/vuetify/webfontloader';
 
-const keycloak = Keycloak(keycloakOptions);
+const keycloak = Keycloak(keycloakConfigs);
 const app = createApp(App);
 
-keycloak.init({
-    enableLogging: true,
-    checkLoginIframe: true,
-    onLoad: 'check-sso'
-}).then(
+(async () => {
+    const fontAwesomeLoader = await loadFonts();
+    return fontAwesomeLoader;
+})()
+
+loadFontAwesome(app);
+
+keycloak.init(keycloakInitOptions).then(
     async (auth) => {
         
         app.config.globalProperties.$keycloak = keycloak;
@@ -33,15 +38,23 @@ keycloak.init({
         app.use(VueAxios, axios)
         app.use(VueSvgInlinePlugin)
         app.use(luxonLoader)
-        app.mount('#app')
-
-        tokenInterceptor()
-        if(keycloak.token)
-        {     
-            await setUserData();
-        }
+        app.use(vuetify)
+        app.mount('#app')     
     if(auth) {
-        updateToken()
+        if(keycloak.token)
+        {   
+            updateToken();
+            tokenInterceptor();     
+            (async () => {
+                const userData = await setUserData();
+                return userData;
+            })()
+        }
+    } else if(!auth) {
+        const user: IUser = await getStoredUserState();
+        if(user.emailAddress != null){
+            app.config.globalProperties.$store.dispatch('authorization/logout')
+        }       
     }
 }).catch((e) => {
     console.log('Authenticated Failed', e);
@@ -68,7 +81,7 @@ async function setUserData() {
 
 function updateToken() {
     setInterval(() => {
-        keycloak.updateToken(70).then((refreshed) => {
+        keycloak.updateToken(3600).then((refreshed) => {
             if (refreshed) {
                 console.log('Token not refreshed')
             } else {
@@ -76,17 +89,26 @@ function updateToken() {
             }
         }).catch((e) => {
             console.log('Update failed ' + e);
+            console.log('Logging out ...')
+            app.config.globalProperties.$store.dispatch('authorization/logout')
         });
-    }, 6000)
+    }, 3600000)
+}
+
+async function getStoredUserState() {
+    const userData = await app.config.globalProperties.$store.getters['authorization/getUser'];
+    return userData;
 }
 
 function tokenInterceptor() {
     axios.interceptors.request.use(config => {
-      if (app.config.globalProperties.$keycloak.authenticated) {
-        config.headers!.Authorization = `Bearer ${app.config.globalProperties.$keycloak.token}`;
-      }
-      return config;
+        config.headers = {
+            'Authorization': `Bearer ${app.config.globalProperties.$keycloak.token}`,
+            'Accept': 'application/json',
+            'Content-Type': 'application/x-www-form-urlencoded'
+        }
+        return config;
     }, error => {
-      return Promise.reject(error);
+        return Promise.reject(error);
     })
 }
