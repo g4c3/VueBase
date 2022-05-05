@@ -9,11 +9,16 @@
             <v-icon icon="mdi-chevron-left"/>
         </v-btn>        
         <div class="container-preview" ref="preview">
-            <div class="item" v-for="item in items" :key="item.i">
-                <div class="card">
-                    <h1>{{item.title}}</h1>
-                    <h5>{{item.content}} {{item.i}}</h5>
-                </div>
+            <div class="item justify-center ma-4" v-for="item in items" :key="item.i">
+                <v-card  
+                    elevation="4">
+                    <v-img
+                        height="200"
+                        src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+                    ></v-img>
+                    <v-card-title>{{item.title}}</v-card-title>
+                    <v-card-text>{{item.content}}</v-card-text>
+                </v-card>
             </div>
         </div>
         <v-btn 
@@ -78,8 +83,8 @@ export default defineComponent({
                 container.scrollTo(options);            
                 setTimeout(() => {
                     this.scrollCompleted = true;
-                this.hasNext = this.checkIfHasNext();
-                this.hasPrev = this.checkIfHasPrev();
+                    this.hasNext = this.checkIfHasNext();
+                    this.hasPrev = this.checkIfHasPrev();
                 }, 750);
             }
         },
@@ -95,8 +100,8 @@ export default defineComponent({
                 container.scrollTo(options);
                 setTimeout(() => {
                     this.scrollCompleted = true;
-                this.hasNext = this.checkIfHasNext();
-                this.hasPrev = this.checkIfHasPrev();
+                    this.hasNext = this.checkIfHasNext();
+                    this.hasPrev = this.checkIfHasPrev();
                 }, 750);                
             }
         },
@@ -115,7 +120,6 @@ export default defineComponent({
         }
     },
 })
-debugger;
 </script>
 
 <style lang="scss" scoped>
@@ -194,7 +198,7 @@ debugger;
     }
 
     .item { 
-        width: calc(100%  / var(--count));
+        width: calc(calc(100% - var(--count) * 2 * 16px)  / var(--count));
     }
 
     .inactive {
