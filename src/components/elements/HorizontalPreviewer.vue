@@ -17,7 +17,7 @@
                         src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
                     ></v-img>
                     <v-card-title>{{item.title}}</v-card-title>
-                    <v-card-text>{{item.content}}</v-card-text>
+                    <v-card-text>{{item.content}} {{item.i}}</v-card-text>
                 </v-card>
             </div>
         </div>
@@ -78,11 +78,12 @@ export default defineComponent({
             //     left: container.scrollLeft - container.clientWidth, 
             //     behavior: "smooth"
             // }
-
+            const scrollTo = container.scrollLeft - container.clientWidth;
+            this.scrollWidth = scrollTo;
             if(this.scrollCompleted) {
                 this.scrollCompleted = false;
                 container.scrollTo({ 
-                    left: container.scrollLeft - container.clientWidth, 
+                    left: scrollTo, 
                     behavior: "smooth"
                 });            
                 setTimeout(() => {
@@ -99,11 +100,12 @@ export default defineComponent({
             //     left: container.scrollLeft + container.clientWidth, 
             //     behavior: "smooth"
             // }            
-
+            const scrollTo = container.scrollLeft + container.clientWidth;
+            this.scrollWidth = scrollTo;
             if(this.scrollCompleted) {
                 this.scrollCompleted = false;   
                 container.scrollTo({ 
-                    left: container.scrollLeft + container.clientWidth, 
+                    left: scrollTo, 
                     behavior: "smooth"
                 });
                 setTimeout(() => {
@@ -124,7 +126,24 @@ export default defineComponent({
             } else {
                 return true;
             }
-        }
+        },
+        resizeHandler() {
+            const container = this.$refs.preview as Element;
+            //TODO: adjust the logic
+            // const scrollTo = container.scrollLeft + container.clientWidth;
+            // this.scrollWidth = scrollTo;
+            // container.scrollTo({ 
+            //     left: scrollTo
+            // });
+            this.hasNext = this.checkIfHasNext();
+            this.hasPrev = this.checkIfHasPrev();
+        },
+    },
+    created() {
+        window.addEventListener("resize", this.resizeHandler);
+    },
+    destroyed() {
+        window.removeEventListener("resize", this.resizeHandler);
     },
 })
 </script>

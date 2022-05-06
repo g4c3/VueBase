@@ -100,7 +100,7 @@ export default defineComponent({
   }
   &-active-line {
     position: absolute;
-    bottom: 12px;
+    bottom: 0;
     left: 0;
     height: 2px;
     background-color: black;

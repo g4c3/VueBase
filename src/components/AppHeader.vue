@@ -1,33 +1,32 @@
 <template>
     <header class="header">
-        <div class="header-container">
+        <div class="header-container" :class="{'header-admin' : isAdmin}">
             <div class="header-container-1">  
-                <h2>{{$t("gifts")}}</h2>          
+                <!-- <h2>{{$t("gifts")}}</h2>           -->
                 <v-icon icon="$giftIcon" />
             </div>
             <v-btn class="header-container-2"  
                 @click="toggleTheme">
-                {{$t("toggleTheme")}}
+                <!-- {{$t("toggleTheme")}} -->
                 <v-icon icon="$theme" />
             </v-btn>
             <v-btn v-if="isAuthenticated" 
                 type="button" 
                 class="header-container-3" 
                 @click="logOut"> 
-                {{$t("logoutBtn")}} 
+                <!-- {{$t("logoutBtn")}}  -->
                 <v-icon icon="mdi-logout" />
             </v-btn>            
             <v-btn v-if="!isAuthenticated" 
                 type="button" 
                 class="header-container-3" 
                 @click="login"> 
-                {{$t("loginBtn")}} 
+                <!-- {{$t("loginBtn")}}  -->
                 <v-icon icon="mdi-login" />
             </v-btn>
             <tabs class="header-container-4" :tabs="tabs" />
-            <div>{{isAdmin}}</div>
-        </div>
-        
+            <div v-if="isAdmin" class="header-admin-container">{{isAdmin}}</div>
+        </div>        
     </header>
 </template>
 
@@ -96,7 +95,7 @@ export default defineComponent({
         background: linear-gradient(white, white);
 
         &-container {
-            background-color: transparentize(#e0ae0a, $amount: .2);
+            background-color: transparentize(#4285f4, $amount: .2);
             width: inherit;
             height: inherit;
             color: black;
@@ -130,7 +129,15 @@ export default defineComponent({
                 grid-row: 2;          
                 justify-self: center;
             }
-        }
-        
+        }   
+        &-admin {
+            grid-template-rows: 1fr 1fr 1fr;
+            padding-bottom: 0;
+            &-container {
+                background-color: #e0ae0a; 
+                grid-row: 3;
+                grid-column: span 4;
+            }
+        }     
     }
 </style>
