@@ -25,6 +25,7 @@
                 <v-icon icon="mdi-login" />
             </v-btn>
             <tabs class="header-container-4" :tabs="tabs" />
+            <div>{{isAdmin}}</div>
         </div>
         
     </header>
@@ -33,8 +34,9 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
-import { mapGetters } from 'vuex';
+import { mapGetters, mapMutations, mapActions } from 'vuex';
 import Tabs from '@/components/elements/TabsWithActiveLine.vue';
+import { Role } from '@/roles/roles';
 
 export default defineComponent({
     name: 'AppHeader',
@@ -56,8 +58,8 @@ export default defineComponent({
         }
     },
     methods:{
-        logout() {
-            this.$store.dispatch('authorization/logout');
+        logOut() {
+            this.logout();
             this.$keycloak.logout({
                 redirectUri:  `${window.location.origin}/`
             });
@@ -66,14 +68,20 @@ export default defineComponent({
             this.$keycloak.login()
         },
         toggleTheme() {
-            this.$store.commit('appManagement/TOGGLE_THEME')
-        }
+            this.TOGGLE_THEME();
+        },
+        ...mapMutations('appManagement', ['TOGGLE_THEME']),
+        ...mapActions('authorization', ['logout'])
     },
     computed: {
         isLoggedIn(): boolean {
             return this.isAuthenticated;
         },
-        ...mapGetters('authorization', ['isAuthenticated', 'loginRole'])
+        isAdmin(): boolean {
+            const roles = this.getRole;
+            return this.$_.includes(roles, Role.AdminUser);
+        },
+        ...mapGetters('authorization', ['isAuthenticated', 'getRole'])
     }
 })
 </script>
@@ -95,7 +103,7 @@ export default defineComponent({
             line-height: 1;
             display: inline-grid;
             grid-template-columns: 1fr 1fr 1fr 1fr;
-            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
             grid-row-gap: 10px;
             grid-column-gap: 3px;
             padding-bottom: 10px;
@@ -109,7 +117,7 @@ export default defineComponent({
             }
             &-2 {
                 grid-column: 4;
-                grid-row: 3;
+                grid-row: 2;
                 justify-self: center;
             }
             &-3 {
@@ -119,7 +127,7 @@ export default defineComponent({
             }
             &-4 {
                 grid-column: 1 / -1;
-                grid-row: 3;          
+                grid-row: 2;          
                 justify-self: center;
             }
         }
