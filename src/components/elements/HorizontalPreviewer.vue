@@ -73,14 +73,18 @@ export default defineComponent({
     methods: {
         prev(): void {
             const container = this.$refs.preview as Element;
-            const options: ScrollToOptions = { 
-                left: container.scrollLeft - container.clientWidth, 
-                behavior: "smooth"
-            }
+            //error 'ScrollToOptions' is not defined no-undef
+            // const options: ScrollToOptions = { 
+            //     left: container.scrollLeft - container.clientWidth, 
+            //     behavior: "smooth"
+            // }
 
             if(this.scrollCompleted) {
                 this.scrollCompleted = false;
-                container.scrollTo(options);            
+                container.scrollTo({ 
+                    left: container.scrollLeft - container.clientWidth, 
+                    behavior: "smooth"
+                });            
                 setTimeout(() => {
                     this.scrollCompleted = true;
                     this.hasNext = this.checkIfHasNext();
@@ -89,15 +93,19 @@ export default defineComponent({
             }
         },
         next(): void {
-            const container = this.$refs.preview as Element;         
-            const options: ScrollToOptions = { 
-                left: container.scrollLeft + container.clientWidth, 
-                behavior: "smooth"
-            }            
+            const container = this.$refs.preview as Element;        
+            //error 'ScrollToOptions' is not defined no-undef 
+            // const options: ScrollToOptions = { 
+            //     left: container.scrollLeft + container.clientWidth, 
+            //     behavior: "smooth"
+            // }            
 
             if(this.scrollCompleted) {
                 this.scrollCompleted = false;   
-                container.scrollTo(options);
+                container.scrollTo({ 
+                    left: container.scrollLeft + container.clientWidth, 
+                    behavior: "smooth"
+                });
                 setTimeout(() => {
                     this.scrollCompleted = true;
                     this.hasNext = this.checkIfHasNext();
