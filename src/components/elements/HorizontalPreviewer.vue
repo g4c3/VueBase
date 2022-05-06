@@ -107,8 +107,7 @@ export default defineComponent({
         },
         checkIfHasNext(): boolean {
             const container = this.$refs.preview as Element;
-            const result =  container.scrollWidth >= container.scrollLeft + container.clientWidth + delta;
-            return result;
+            return container.scrollWidth >= container.scrollLeft + container.clientWidth + delta;
         },
         checkIfHasPrev(): boolean {
             const container = this.$refs.preview as Element;

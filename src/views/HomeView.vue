@@ -7,7 +7,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed } from 'vue';
+import { defineComponent } from 'vue';
 import HelloWorld from '@/components/HelloWorld.vue';
 import WellcomeView from '../components/WellcomeView.vue';
 import HorizontalPreviewer from "@/components/elements/HorizontalPreviewer.vue";

@@ -1,20 +1,20 @@
 <template>
     <nav class="tabs">
       <button
-        class="tabs__item"
+        class="tabs-item"
         type="button"
         v-for="tab in tabs" 
         :key="tab.title" 
         :class="[
-            { 'tabs__item_active' : tab.value === currentTab },
-            tab.value === currentTab && 'tabs__item_active' ? 'tabs__item_active': ''
+            { 'tabs-item-active' : tab.value === currentTab },
+            tab.value === currentTab && 'tabs-item-active' ? 'tabs-item-active': ''
         ]"
         :disabled="tab.disabled || false"
         @click="handleClick(tab.value)"
         :ref="tab.value"
         v-html="tab.title"/>
       <div
-          class="tabs__active-line"
+          class="tabs-active-line"
           :style="{ width: `${activeLineWidth}px`, transform: `translateX(${activeLineOffset}px)` }"
       />
     </nav>
@@ -73,13 +73,13 @@ export default defineComponent({
   position: relative;
   margin: 0 auto;
 
-  &__item {
+  &-item {
     display: inline-block;
     margin: 0 5px;
     padding: 10px;
     padding-bottom: 8px;
     font-size: 16px;
-    &_active {
+    &-active {
       color: black;
     }
     &:hover {
@@ -98,7 +98,7 @@ export default defineComponent({
       margin-right: 0;
     }
   }
-  &__active-line {
+  &-active-line {
     position: absolute;
     bottom: 12px;
     left: 0;
