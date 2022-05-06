@@ -9,10 +9,10 @@
   },
   "dependencies": {
     "@fortawesome/vue-fontawesome": "^3.0.0-5",
-    "axios": "^0.26.1",
+    "axios": "^0.27.2",
     "core-js": "^3.8.3",
     "guid-typescript": "^1.0.9",
-    "keycloak-js": "^17.0.1",
+    "keycloak-js": "^18.0.0",
     "lodash": "^4.17.21",
     "luxon": "^2.3.1",
     "register-service-worker": "^1.7.2",

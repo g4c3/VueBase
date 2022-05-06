@@ -1,10 +1,10 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
 import HomeView from '@/views/HomeView.vue'
 import { App } from 'vue';
-import { KeycloakInstance } from 'keycloak-js';
+import Keycloak from 'keycloak-js';
 
 const createRoutes = (app: App, store) => {
-  const keycloak: KeycloakInstance = app.config.globalProperties.$keycloak;
+  const keycloak: Keycloak = app.config.globalProperties.$keycloak;
   const preventRoutes = {
     beforeEnter(to, from, next) {
       if(to.meta.requiresAuth){

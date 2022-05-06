@@ -9,14 +9,14 @@ import axios from 'axios';
 import VueAxios from 'vue-axios';
 import VueSvgInlinePlugin from "vue-svg-inline-plugin";
 import luxonLoader from './modules/luxon/luxonLoader';
-import Keycloak, { KeycloakInstance } from "keycloak-js";
+import Keycloak from "keycloak-js";
 import { keycloakConfigs, keycloakInitOptions } from './configs/keycloak';
 import { IUser } from './interfaces/intefaces';
 import { Role } from './roles/roles';
 import vuetify, { loadFontAwesome } from './plugins/vuetify/vuetify';
 import { loadFonts } from './plugins/vuetify/webfontloader';
 
-const keycloak = Keycloak(keycloakConfigs);
+const keycloak = new Keycloak(keycloakConfigs);
 const app = createApp(App);
 
 (async () => {
@@ -62,7 +62,7 @@ keycloak.init(keycloakInitOptions).then(
 
 declare module "@vue/runtime-core" {
     interface ComponentCustomProperties {
-      $keycloak: KeycloakInstance;
+      $keycloak: Keycloak;
     }
 }
 

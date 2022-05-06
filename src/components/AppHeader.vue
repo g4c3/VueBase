@@ -13,7 +13,7 @@
             <v-btn v-if="isAuthenticated" 
                 type="button" 
                 class="header-container-3" 
-                @click="logout"> 
+                @click="logOut"> 
                 {{$t("logoutBtn")}} 
                 <v-icon icon="mdi-logout" />
             </v-btn>            
