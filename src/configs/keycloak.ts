@@ -12,6 +12,7 @@ export const keycloakConfigs: KeycloakProjectConfigs = {
 export const keycloakInitOptions: KeycloakInitOptions = {    
     enableLogging: false,
     checkLoginIframe: true,
-    onLoad: 'check-sso'
+    onLoad: 'check-sso',
+    // silentCheckSsoRedirectUri: window.location.origin + '/silent-check-sso.html'
 }
 

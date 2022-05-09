@@ -25,3 +25,14 @@ export interface KeycloakProjectConfigs extends KeycloakConfig {
     'public-client': boolean,
     'verify-token-audience': boolean
 }
+
+export interface VueHorizontalData {
+    left: number;
+    width: number;
+
+    scrollWidth: number;
+    scrollCompleted: boolean;
+    hasPrev: boolean;
+    hasNext: boolean;
+    firstVisibleEl: number;
+}

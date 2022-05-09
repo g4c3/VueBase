@@ -34,15 +34,8 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue';
+import { VueHorizontalData } from '@/interfaces/intefaces';
 
-interface VueHorizontalData {
-  left: number;
-  width: number;
-  scrollWidth: number;
-  scrollCompleted: boolean;
-  hasPrev: boolean;
-  hasNext: boolean;
-}
 const delta = 2.5
 export default defineComponent({
     name: 'CardPreviewer',
@@ -53,7 +46,8 @@ export default defineComponent({
             scrollWidth: 0,
             scrollCompleted: true,
             hasPrev: false,
-            hasNext: true
+            hasNext: true,
+            firstVisibleEl: 0
         }
     },
     props: {
@@ -90,6 +84,7 @@ export default defineComponent({
                     this.scrollCompleted = true;
                     this.hasNext = this.checkIfHasNext();
                     this.hasPrev = this.checkIfHasPrev();
+                    this.firstVisibleEl = this.getFirstVisibleElement();
                 }, 750);
             }
         },
@@ -112,7 +107,8 @@ export default defineComponent({
                     this.scrollCompleted = true;
                     this.hasNext = this.checkIfHasNext();
                     this.hasPrev = this.checkIfHasPrev();
-                }, 750);                
+                    this.firstVisibleEl = this.getFirstVisibleElement(); 
+                }, 750);             
             }
         },
         checkIfHasNext(): boolean {
@@ -129,20 +125,24 @@ export default defineComponent({
         },
         resizeHandler() {
             const container = this.$refs.preview as Element;
-            //TODO: adjust the logic
-            // const scrollTo = container.scrollLeft + container.clientWidth;
-            // this.scrollWidth = scrollTo;
-            // container.scrollTo({ 
-            //     left: scrollTo
-            // });
+            const scrollPos = (container.children[0].scrollWidth + 32) * this.firstVisibleEl;
+            
+            container.scrollTo({ 
+                left: scrollPos, 
+                behavior: "auto"
+            });
             this.hasNext = this.checkIfHasNext();
             this.hasPrev = this.checkIfHasPrev();
         },
+        getFirstVisibleElement(): number {
+            const container = this.$refs.preview as Element;
+            return Math.round(container.scrollLeft / (container.children[0].scrollWidth + 32));
+        }
     },
     created() {
         window.addEventListener("resize", this.resizeHandler);
     },
-    destroyed() {
+    unmounted() {
         window.removeEventListener("resize", this.resizeHandler);
     },
 })
@@ -197,29 +197,39 @@ export default defineComponent({
         }
     }
 
-    @media (max-width: 480px){
+    @media (max-width: 450px){
         .container {
             --count: 1;
         }
     }
-    @media (min-width: 640px) {
+    @media (min-width: 450px) {
         .container {
             --count: 2;
         }
     }
-    @media (min-width: 768px) {
+    @media (min-width: 600px) {
         .container {
             --count: 3;
         }
     }
-    @media (min-width: 1024px) {
+        @media (min-width: 768px) {
         .container {
             --count: 4;
+        }
+    }
+    @media (min-width: 1024px) {
+        .container {
+            --count: 5;
         }
     }
     @media (min-width: 1280px) {
         .container {
             --count: 6;
+        }
+    }
+    @media (min-width: 1640px) {
+        .container {
+            --count: 7;
         }
     }
 
